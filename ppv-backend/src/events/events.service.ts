@@ -15,4 +15,8 @@ export class EventsService {
     async find(): Promise<Event[]> {
         return this.eventRepository.find();
     }
+
+    async create(data): Promise<Event> {
+        return this.eventRepository.save(data);
+    }
 }
