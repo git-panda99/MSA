@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MyEventsPage } from './myevents.page';
+import { MyEventsPage } from './my-events.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
-import { MyEventsPageRoutingModule } from './myevents-routing.module';
+import { MyEventsPageRoutingModule } from './my-events-routing.module';
 import { EventsModule } from 'src/app/events/events.module';
 
 @NgModule({

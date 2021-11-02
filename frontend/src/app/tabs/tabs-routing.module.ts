@@ -9,23 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../alltabs/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('../all-tabs/home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'search',
-        loadChildren: () => import('../alltabs/search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule)
       },
       {
-        path: 'mytickets',
-        loadChildren: () => import('../alltabs/mytickets/mytickets.module').then(m => m.MyTicketsPageModule)
+        path: 'my-tickets',
+        loadChildren: () => import('../all-tabs/my-tickets/my-tickets.module').then(m => m.MyTicketsPageModule)
       },
       {
-        path: 'myevents',
-        loadChildren: () => import('../alltabs/myevents/myevents.module').then(m => m.MyEventsPageModule)
+        path: 'my-events',
+        loadChildren: () => import('../all-tabs/my-events/my-events.module').then(m => m.MyEventsPageModule)
       },
       {
         path: 'settings',
-        loadChildren: () => import('../alltabs/settings/settings.module').then(m => m.SettingsPageModule)
+        loadChildren: () => import('../all-tabs/settings/settings.module').then(m => m.SettingsPageModule)
       },
       {
         path: '',
