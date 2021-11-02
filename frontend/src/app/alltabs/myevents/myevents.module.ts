@@ -7,6 +7,7 @@ import { MyEventsPage } from './myevents.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { MyEventsPageRoutingModule } from './myevents-routing.module';
+import { EventsModule } from 'src/app/events/events.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { MyEventsPageRoutingModule } from './myevents-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
+    EventsModule,
     RouterModule.forChild([{ path: '', component: MyEventsPage }]),
     MyEventsPageRoutingModule,
   ],
