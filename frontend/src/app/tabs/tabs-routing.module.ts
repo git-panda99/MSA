@@ -9,23 +9,23 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('../alltabs/home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'search',
-        loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () => import('../alltabs/search/search.module').then(m => m.SearchPageModule)
       },
       {
         path: 'mytickets',
-        loadChildren: () => import('../mytickets/mytickets.module').then(m => m.MyTicketsPageModule)
+        loadChildren: () => import('../alltabs/mytickets/mytickets.module').then(m => m.MyTicketsPageModule)
       },
       {
         path: 'myevents',
-        loadChildren: () => import('../myevents/myevents.module').then(m => m.MyEventsPageModule)
+        loadChildren: () => import('../alltabs/myevents/myevents.module').then(m => m.MyEventsPageModule)
       },
       {
         path: 'settings',
-        loadChildren: () => import('../settings/settings.module').then(m => m.SettingsPageModule)
+        loadChildren: () => import('../alltabs/settings/settings.module').then(m => m.SettingsPageModule)
       },
       {
         path: '',
