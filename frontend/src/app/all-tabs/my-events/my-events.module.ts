@@ -17,7 +17,7 @@ import { EventsModule } from 'src/app/events/events.module';
     ExploreContainerComponentModule,
     EventsModule,
     RouterModule.forChild([{ path: '', component: MyEventsPage }]),
-    MyEventsPageRoutingModule,
+    MyEventsPageRoutingModule,    
   ],
   declarations: [MyEventsPage]
 })
