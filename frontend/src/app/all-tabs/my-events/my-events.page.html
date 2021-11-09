@@ -7,25 +7,31 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list class="ios list-ios hydrated">
 
-    <ion-item *ngFor="let event of EventVideos" class="item-label item ios in-list ion-focusable hydrated">
-      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
-        <h2>{{event.event}}</h2>
-        <h3>{{event.description}}</h3>
-      </ion-label>
-
-      <div class="item-note" item-end>
-        <button ion-button clear [routerLink]="['/update-event/', event._id]">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
-        </button>
-        <button ion-button clear (click)="deleteEventVideo(event, i)">
-          <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-        </button>
-      </div>
-    </ion-item>
-  </ion-list>
-
+    <ion-grid>
+      <ion-row>
+      <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{event.title}}</ion-card-title>
+          <div class="item-note" item-end>
+            <button ion-button clear [routerLink]="['/update-event/', event._id]">
+              <ion-icon name="create" style="zoom:2.0"></ion-icon>
+            </button>
+            <button ion-button clear (click)="deleteEventVideo(event, i)">
+              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+            </button>
+          </div>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{event.description}}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    </ion-row>
+      
+    </ion-grid>  
 
   <!-- fab placed to the bottom start -->
   <ion-fab horizontal="end" slot="fixed" routerLink="create-event">
