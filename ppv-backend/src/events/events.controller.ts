@@ -23,12 +23,12 @@ export class EventsController {
         @Body("endDate") endDate: Date,
         @Body("type") type: string,
         @Body("source") source: string,
-        @Body("videoUrl") videUrl: string,
+        @Body("videoUrl") videoUrl: string,
     ) {
         return this.eventService.create({
             title, posterUrl, description,
             price, beginDate, endDate,
-            type, source, videUrl
+            type, source, videoUrl
         })
     }
 }
