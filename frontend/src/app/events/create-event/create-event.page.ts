@@ -19,7 +19,15 @@ export class CreateEventPage implements OnInit {
   ) {
     this.eventForm = this.fb.group({
       title: [''],
-      description: ['']
+      posterUrl: "",
+      description: [''],
+      price: 0,
+      beginDate: "2012-10-25T12:00:00.000Z",
+      endDate: "2012-10-25T12:00:00.000Z",
+      type: "",
+      source: "",
+      videoUrl: ""
+
     })
   }
 
@@ -34,7 +42,7 @@ export class CreateEventPage implements OnInit {
           this.zone.run(() => {
             console.log(res)
             this.eventForm.reset();
-            this.router.navigate(['/']);
+            this.router.navigate(['/tabs/my-events']);
           })
         });
     }

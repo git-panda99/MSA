@@ -3,14 +3,14 @@ export class EventVideo {
     user_id: number;
     category_id: number;
     title: string;
-    poster_url: string;
+    posterUrl: string;
     description: string;
     price: number;
-    begin_date: Date;
-    end_date: Date;
+    beginDate: Date;
+    endDate: Date;
     type: string;
     source: string;
-    video_url: string;
+    videoUrl: string;
     tickets: string; //to add array later
     ended: boolean;
 }

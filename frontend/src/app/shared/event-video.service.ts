@@ -15,14 +15,14 @@ export class EventVideoService {
   constructor(private http: HttpClient) { }
 
   addEventVideo(event: EventVideo): Observable<any> {
-    return this.http.post<EventVideo>('http://localhost:3308/api/create-event', event, this.httpOptions)
+    return this.http.post<EventVideo>('http://localhost:3000/api/events', event, this.httpOptions)
       .pipe(
         catchError(this.handleError<EventVideo>('Add Event'))
       );
   }
 
   getEventVideo(id): Observable<EventVideo[]> {
-    return this.http.get<EventVideo[]>('http://localhost:3308/api/get-event/' + id)
+    return this.http.get<EventVideo[]>('http://localhost:3000/api/events' + id)
       .pipe(
         tap(_ => console.log(`Event fetched: ${id}`)),
         catchError(this.handleError<EventVideo[]>(`Get Event id=${id}`))
@@ -30,7 +30,7 @@ export class EventVideoService {
   }
 
   getEventVideoList(): Observable<EventVideo[]> {
-    return this.http.get<EventVideo[]>('http://localhost:3308/api')
+    return this.http.get<EventVideo[]>('http://localhost:3000/api/events/')
       .pipe(
         tap(events => console.log('Events fetched!')),
         catchError(this.handleError<EventVideo[]>('Get Events', []))
@@ -38,7 +38,7 @@ export class EventVideoService {
   }
 
   updateEventVideo(id, event: EventVideo): Observable<any> {
-    return this.http.put('http://localhost:3308/api/update-event/' + id, event, this.httpOptions)
+    return this.http.put('http://localhost:3000/api/events' + id, event, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event updated: ${id}`)),
         catchError(this.handleError<EventVideo[]>('Update Event'))
