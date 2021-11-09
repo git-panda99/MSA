@@ -20,7 +20,7 @@ export class EventsController {
         @Body("description") description: string,
         @Body("price") price: string,
         @Body("beginDate") beginDate: Date,
-        @Body("endDate") endDate: string,
+        @Body("endDate") endDate: Date,
         @Body("type") type: string,
         @Body("source") source: string,
         @Body("videoUrl") videoUrl: string,

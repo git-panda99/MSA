@@ -1,64 +1,52 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>Create Event</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Event</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()">
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title>Add Event</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
       <ion-item>
         <ion-label>Title</ion-label>
-        <ion-input placeholder="Event Title"></ion-input>
+        <ion-input placeholder="Event Title" formControlName="title" type="text" required ngDefaultControl></ion-input>
       </ion-item>
-
+      
       <br>
       <ion-item>
         <ion-label>Image</ion-label>
-        <ion-input placeholder="Poster Image"></ion-input>
+        <ion-input placeholder="Poster Image" formControlName="posterUrl" required ngDefaultControl></ion-input>
       </ion-item>
-
+      <!--
       <br>
       <ion-list>
-        <ion-radio-group value="biff">
+        <ion-radio-group value="biff" formControlName="type" required ngDefaultControl>
           <ion-list-header>
             <ion-label>Event type:</ion-label>
           </ion-list-header>
-      
+
           <ion-item>
             <ion-label>Live</ion-label>
             <ion-radio slot="start" value="live"></ion-radio>
           </ion-item>
-      
+
           <ion-item>
             <ion-label>Premiere</ion-label>
             <ion-radio slot="start" value="premiere"></ion-radio>
           </ion-item>
-      
+
           <ion-item>
             <ion-label>Recording</ion-label>
             <ion-radio slot="start" value="recording"></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
-
+      -->
       <br>
       <ion-item>
         <ion-label>Start time:</ion-label>
-        <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" min="2020" max="2030" value="2012-10-25T12:00:00.000Z"  formControlName="beginDate" required ngDefaultControl></ion-datetime>
       </ion-item>
 
       <ion-item>
@@ -69,41 +57,43 @@
       <br>
       <ion-item>
         <ion-label>End time:</ion-label>
-        <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
-      </ion-item>
-
-      <br>
-      <ion-item>
-        <ion-label>Price:</ion-label>
-        <ion-input placeholder=0 type="cc-number"></ion-input>
-      </ion-item>
-
-      <br>
-      <ion-item>
-        <ion-label>Description:</ion-label>
-        <ion-textarea placeholder="Enter Event Description..."></ion-textarea>
-      </ion-item>
-
-      <br>
-      <ion-item>
-        <ion-label>Link type:</ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value=".m3u8">.m3u8</ion-select-option>
-          <ion-select-option value="youtube">youtube</ion-select-option>
-        </ion-select>
+        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" value="2012-10-25T12:00:00.000Z" formControlName="endDate" required ngDefaultControl></ion-datetime>
       </ion-item>
       
       <br>
       <ion-item>
-        <ion-label>Link:</ion-label>
-        <ion-input placeholder="url"></ion-input>
+        <ion-label>Price:</ion-label>
+        <ion-input placeholder=0 type="cc-number" formControlName="price" required ngDefaultControl></ion-input>
       </ion-item>
-
-      <ion-button (click)=(addEvent)>Add Event</ion-button>
-    </ion-card-content>
-
+      
+      <br>
+      <ion-item>
+        <ion-label>Description:</ion-label>
+        <ion-textarea placeholder="Enter Event Description..." formControlName="description" required ngDefaultControl></ion-textarea>
+      </ion-item>
+      <!--
+      <br>
+      <ion-item>
+        <ion-label>Link type:</ion-label>
+        <ion-select placeholder="Select One" formControlName="source" required ngDefaultControl>
+          <ion-select-option value=".m3u8">.m3u8</ion-select-option>
+          <ion-select-option value="youtube">youtube</ion-select-option>
+        </ion-select>
+      </ion-item>
+      -->
+      <br>
+      <ion-item>
+        <ion-label>Link:</ion-label>
+        <ion-input placeholder="url" formControlName="videoUrl" required ngDefaultControl></ion-input>
+      </ion-item>
     
-  </ion-card>
-  
 
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Add Event</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
 </ion-content>
