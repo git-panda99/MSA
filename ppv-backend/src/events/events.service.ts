@@ -2,21 +2,11 @@ import { Injectable } from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Event} from "./events.entity";
 import {Repository} from "typeorm";
+import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
 @Injectable()
-export class EventsService {
-
-    constructor(
-        @InjectRepository(Event) private readonly eventRepository: Repository<Event>
-    ) {
-
-    }
-    
-    async find(): Promise<Event[]> {
-        return this.eventRepository.find();
-    }
-
-    async create(data): Promise<Event> {
-        return this.eventRepository.save(data);
+export class EventsService extends TypeOrmCrudService<Event> {
+    constructor(@InjectRepository(Event) private eventRepository: Repository<Event>) {
+        super(eventRepository)
     }
 }

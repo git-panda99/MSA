@@ -1,46 +1,56 @@
+import { ApiProperty } from "@nestjs/swagger";
 import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class Event {
     @PrimaryGeneratedColumn()
-    eventId: number;
+    id: number;
     
+    @ApiProperty()
     @Column()
     userId: number;
 
+    @ApiProperty()
     @Column()
     categoryId: number;
 
+    @ApiProperty()
     @Column()
     title: string;
 
+    @ApiProperty()
     @Column()
     posterUrl: string;
 
+    @ApiProperty()
     @Column()
     description: string;
 
+    @ApiProperty()
     @Column()
     price: number;
 
+    @ApiProperty()
     @Column()
     beginDate: Date;
 
+    @ApiProperty()
     @Column()
     endDate: Date;
 
+    @ApiProperty()
     @Column()
     type: string;
 
+    @ApiProperty()
     @Column()
     source: string;
 
+    @ApiProperty()
     @Column()
     videoUrl: string;
 
-    @Column()
-    tickets: string; //to add array later
-
+    @ApiProperty()
     @Column()
     ended: boolean;
 }
