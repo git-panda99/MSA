@@ -22,7 +22,7 @@ export class EventVideoService {
   }
 
   getEventVideo(id): Observable<EventVideo[]> {
-    return this.http.get<EventVideo[]>('http://localhost:3000/api/events' + id)
+    return this.http.get<EventVideo[]>('http://localhost:3000/api/events/' + id)
       .pipe(
         tap(_ => console.log(`Event fetched: ${id}`)),
         catchError(this.handleError<EventVideo[]>(`Get Event id=${id}`))
@@ -38,7 +38,7 @@ export class EventVideoService {
   }
 
   updateEventVideo(id, event: EventVideo): Observable<any> {
-    return this.http.put('http://localhost:3000/api/events' + id, event, this.httpOptions)
+    return this.http.put('http://localhost:3000/api/events/' + id, event, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event updated: ${id}`)),
         catchError(this.handleError<EventVideo[]>('Update Event'))
@@ -46,7 +46,7 @@ export class EventVideoService {
   }
 
   deleteEventVideo(id): Observable<EventVideo[]> {
-    return this.http.delete<EventVideo[]>('http://localhost:3308/api/delete-event/' + id, this.httpOptions)
+    return this.http.delete<EventVideo[]>('http://localhost:3000/api/events/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event deleted: ${id}`)),
         catchError(this.handleError<EventVideo[]>('Delete Event'))

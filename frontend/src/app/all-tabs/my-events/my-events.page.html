@@ -15,7 +15,8 @@
         <ion-card-header>
           <ion-card-title>{{event.title}}</ion-card-title>
           <div class="item-note" item-end>
-            <button ion-button clear [routerLink]="['/update-event/', event._id]">
+            <button ion-button clear [routerLink]="['./update-event/', event.id]">
+              
               <ion-icon name="create" style="zoom:2.0"></ion-icon>
             </button>
             <button ion-button clear (click)="deleteEventVideo(event, i)">
@@ -25,6 +26,7 @@
         </ion-card-header>
       
         <ion-card-content>
+         this is the id{{event.id}}....
           {{event.description}}
         </ion-card-content>
       </ion-card>

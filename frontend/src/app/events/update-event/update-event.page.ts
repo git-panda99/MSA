@@ -26,7 +26,14 @@ export class UpdateEventPage implements OnInit {
     this.getEventVideoData(this.id);
     this.updateEventVideoForm = this.fb.group({
       title: [''],
-      description: ['']
+      posterUrl: "",
+      description: [''],
+      price: 0,
+      beginDate: "2012-10-25T12:00:00.000Z",
+      endDate: "2012-10-25T12:00:00.000Z",
+      type: "",
+      source: "",
+      videoUrl: ""
     })
   }
 
@@ -34,7 +41,14 @@ export class UpdateEventPage implements OnInit {
     this.eventVideoAPI.getEventVideo(id).subscribe(res => {
       this.updateEventVideoForm.setValue({
         title: res['title'],
-        description: res['description']
+        posterUrl: res['posterUrl'],
+        description: res['description'],
+        price: res['price'],
+        beginDate: res['beginDate'],
+        endDate: res['endDate'],
+        type: res['type'],
+        source: res['source'],
+        videoUrl: res['videoUrl']
       });
     });
   }
