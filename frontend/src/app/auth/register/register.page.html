@@ -5,5 +5,33 @@
 </ion-header>
 
 <ion-content>
+  <form (ngSubmit)="onFormSubmit()">
+
+    <ion-item>
+      <ion-label>Username</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+    
+    <br>
+    <ion-item>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Confirm Password</ion-label>
+      <ion-input type="password" ></ion-input>
+    </ion-item>
+  
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" shape="full" expand="block">Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+  <ion-button color="tertiary" [routerLink]="['/login']">Login</ion-button>
 
 </ion-content>

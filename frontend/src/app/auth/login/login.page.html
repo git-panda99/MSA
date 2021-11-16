@@ -23,10 +23,15 @@
 
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Add Event</ion-button>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Login</ion-button>
         </ion-col>
       </ion-row>
     </form>
+
+    <ion-button color="secondary" [routerLink]="['/register']">Register    </ion-button>
+
+    <ion-button color="tertiary" [routerLink]="['/tabs/home']">Skip for now</ion-button>
+
   </ion-list>
 
 </ion-content>
