@@ -1,11 +1,11 @@
 import { Controller, Request, Post, UseGuards } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { ApiParam, ApiTags } from "@nestjs/swagger";
+import { LocalAuthGuard } from "./auth/local-auth.guard";
 
 @ApiTags('auth')
 @Controller()
 export class AppController {
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   @ApiParam({name: 'email', type: 'string'})
   @ApiParam({name: 'password', type: 'string'})
