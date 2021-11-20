@@ -4,6 +4,8 @@ import { EventsModule } from './events/events.module';
 import { UsersModule } from './users/users.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { CategoriesModule } from './categories/categories.module';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { CategoriesModule } from './categories/categories.module';
     UsersModule,
     TicketsModule,
     CategoriesModule,
+    AuthModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
