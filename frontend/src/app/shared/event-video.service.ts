@@ -3,6 +3,7 @@ import { EventVideo } from './event-video';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,14 @@ export class EventVideoService {
   constructor(private http: HttpClient) { }
 
   addEventVideo(event: EventVideo): Observable<any> {
-    return this.http.post<EventVideo>('http://localhost:3000/api/events', event, this.httpOptions)
+    return this.http.post<EventVideo>(environment.api_url+'/events', event, this.httpOptions)
       .pipe(
         catchError(this.handleError<EventVideo>('Add Event'))
       );
   }
 
   getEventVideo(id): Observable<EventVideo[]> {
-    return this.http.get<EventVideo[]>('http://localhost:3000/api/events/' + id)
+    return this.http.get<EventVideo[]>(environment.api_url + '/events/' + id)
       .pipe(
         tap(_ => console.log(`Event fetched: ${id}`)),
         catchError(this.handleError<EventVideo[]>(`Get Event id=${id}`))
@@ -30,7 +31,7 @@ export class EventVideoService {
   }
 
   getEventVideoList(): Observable<EventVideo[]> {
-    return this.http.get<EventVideo[]>('http://localhost:3000/api/events/')
+    return this.http.get<EventVideo[]>(environment.api_url + '/events/')
       .pipe(
         tap(events => console.log('Events fetched!')),
         catchError(this.handleError<EventVideo[]>('Get Events', []))
@@ -38,7 +39,7 @@ export class EventVideoService {
   }
 
   updateEventVideo(id, event: EventVideo): Observable<any> {
-    return this.http.put('http://localhost:3000/api/events/' + id, event, this.httpOptions)
+    return this.http.put(environment.api_url + '/events/' + id, event, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event updated: ${id}`)),
         catchError(this.handleError<EventVideo[]>('Update Event'))
@@ -46,7 +47,7 @@ export class EventVideoService {
   }
 
   deleteEventVideo(id): Observable<EventVideo[]> {
-    return this.http.delete<EventVideo[]>('http://localhost:3000/api/events/' + id, this.httpOptions)
+    return this.http.delete<EventVideo[]>(environment.api_url + '/events/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event deleted: ${id}`)),
         catchError(this.handleError<EventVideo[]>('Delete Event'))
