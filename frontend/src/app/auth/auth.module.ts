@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -14,7 +14,8 @@ import { IonicStorageModule } from '@ionic/storage';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

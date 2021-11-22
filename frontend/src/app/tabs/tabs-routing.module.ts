@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../guards/auth.guard';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -13,19 +14,23 @@ const routes: Routes = [
       },
       {
         path: 'search',
-        loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: 'my-tickets',
-        loadChildren: () => import('../all-tabs/my-tickets/my-tickets.module').then(m => m.MyTicketsPageModule)
+        loadChildren: () => import('../all-tabs/my-tickets/my-tickets.module').then(m => m.MyTicketsPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: 'my-events',
-        loadChildren: () => import('../all-tabs/my-events/my-events.module').then(m => m.MyEventsPageModule)
+        loadChildren: () => import('../all-tabs/my-events/my-events.module').then(m => m.MyEventsPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: 'settings',
-        loadChildren: () => import('../all-tabs/settings/settings.module').then(m => m.SettingsPageModule)
+        loadChildren: () => import('../all-tabs/settings/settings.module').then(m => m.SettingsPageModule),
+        canLoad: [AuthGuard]
       },
       {
         path: '',
