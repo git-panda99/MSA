@@ -6,6 +6,7 @@ import { TicketsModule } from './tickets/tickets.module';
 import { CategoriesModule } from './categories/categories.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AppController } from './app.controller';
     TicketsModule,
     CategoriesModule,
     AuthModule,
+    FilesModule,
   ],
   controllers: [AppController],
 })
