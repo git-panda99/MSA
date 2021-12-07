@@ -5,6 +5,32 @@
 </ion-header>
 
 <ion-content>
+  <form #f="ngForm" (ngSubmit)="uploadImage(f)">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Upload event poster</h3>
+          </div>
+          <div padding>
+            <ion-item>
+                <img *ngIf="imageURL" [src]="imageURL"
+                />
+            </ion-item>
+            <ion-item>
+              <input name="file" type="file" accept="image/x-png,image/jpeg" (change)="attachFile($event)" ngModel required />
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button type="submit" [disabled]="f.invalid" expand="block">Upload photo</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+
+
   <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form [formGroup]="eventForm" (ngSubmit)="onFormSubmit()">
 

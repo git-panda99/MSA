@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventVideoService } from 'src/app/shared/event-video.service';
+import { ImageService } from 'src/app/shared/image/image.service';
+
 
 @Component({
   selector: 'app-create-event',
@@ -10,12 +13,16 @@ import { EventVideoService } from 'src/app/shared/event-video.service';
 })
 export class CreateEventPage implements OnInit {
   eventForm: FormGroup;
+  fileToUpload: File = null;
+  userId = null;
+  imageURL;
 
   constructor(
     private eventVidoeAPI: EventVideoService,
+    private imageService: ImageService,
     private router: Router,
     public fb: FormBuilder,
-    private zone: NgZone
+    private zone: NgZone,
   ) {
     this.eventForm = this.fb.group({
       title: [''],
@@ -32,6 +39,14 @@ export class CreateEventPage implements OnInit {
   }
 
   ngOnInit() { }
+
+  attachFile(e){
+    this.imageService.attachFile(e);
+  }
+
+  uploadImage(f){
+    this.imageService.uploadImage(f);
+  }
 
   onFormSubmit() {
     if (!this.eventForm.valid) {
