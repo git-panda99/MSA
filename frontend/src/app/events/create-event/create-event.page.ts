@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EventVideoService } from 'src/app/shared/event-video.service';
-import { ImageService } from 'src/app/shared/image/image.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -18,11 +19,12 @@ export class CreateEventPage implements OnInit {
   imageURL;
 
   constructor(
+    private http: HttpClient,
     private eventVidoeAPI: EventVideoService,
-    private imageService: ImageService,
     private router: Router,
     public fb: FormBuilder,
     private zone: NgZone,
+    private sanitizer: DomSanitizer
   ) {
     this.eventForm = this.fb.group({
       title: [''],
@@ -41,11 +43,22 @@ export class CreateEventPage implements OnInit {
   ngOnInit() { }
 
   attachFile(e){
-    this.imageService.attachFile(e);
+    if (e.target.files.length == 0) {
+      console.log("No file selected!");
+      return
+    }
+    let file: File = e.target.files[0];
+    this.fileToUpload = file;
   }
 
   uploadImage(f){
-    this.imageService.uploadImage(f);
+    let formData = new FormData(); 
+    formData.append('file', this.fileToUpload, this.fileToUpload.name); 
+    this.http.post(environment.api_url+'/files/upload', formData).subscribe((res) => {
+
+    console.log(res);
+    this.imageURL = environment.api_url + '/files/' + res['filename'];
+    });
   }
 
   onFormSubmit() {
