@@ -65,6 +65,7 @@ export class CreateEventPage implements OnInit {
     if (!this.eventForm.valid) {
       return false;
     } else {
+      this.eventForm.value.posterUrl = this.imageURL;
       this.eventVidoeAPI.addEventVideo(this.eventForm.value)
         .subscribe((res) => {
           this.zone.run(() => {

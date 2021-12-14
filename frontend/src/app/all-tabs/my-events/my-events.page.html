@@ -13,6 +13,7 @@
       <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
       <ion-card>
         <ion-card-header>
+          <img *ngIf="event.posterUrl" [src]="event.posterUrl"/>
           <ion-card-title>{{event.title}}</ion-card-title>
           <div class="item-note" item-end>
             <button ion-button clear [routerLink]="['./update-event/', event.id]">
