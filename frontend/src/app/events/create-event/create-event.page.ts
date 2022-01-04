@@ -16,7 +16,8 @@ export class CreateEventPage implements OnInit {
   eventForm: FormGroup;
   fileToUpload: File = null;
   userId = null;
-  imageURL;
+  imageURL: string;
+  apiUrl: string;
 
   constructor(
     private http: HttpClient,
@@ -26,6 +27,7 @@ export class CreateEventPage implements OnInit {
     private zone: NgZone,
     private sanitizer: DomSanitizer
   ) {
+    this.apiUrl = environment.api_url;
     this.eventForm = this.fb.group({
       title: [''],
       posterUrl: "",
@@ -57,7 +59,7 @@ export class CreateEventPage implements OnInit {
     this.http.post(environment.api_url+'/files/upload', formData).subscribe((res) => {
 
     console.log(res);
-    this.imageURL = environment.api_url + '/files/' + res['filename'];
+    this.imageURL = res['filename'];
     });
   }
 

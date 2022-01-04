@@ -14,7 +14,7 @@
           </div>
           <div padding>
             <ion-item>
-                <img *ngIf="imageURL" [src]='imageURL'
+                <img *ngIf="imageURL" [src]="apiUrl+'/files/'+imageURL"
                 />
             </ion-item>
             <ion-item>
