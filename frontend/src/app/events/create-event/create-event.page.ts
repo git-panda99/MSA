@@ -3,7 +3,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { catchError, tap } from 'rxjs/operators';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -19,6 +18,7 @@ export class CreateEventPage implements OnInit {
   userId = null;
   imageURL: string;
   apiUrl: string;
+  fileValid: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -50,6 +50,15 @@ export class CreateEventPage implements OnInit {
       console.log("No file selected!");
       return
     }
+
+    if (!e.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
+      console.log('not an image: '+ e.target.files[0].name);
+      this.fileValid = false;
+      this.fileToUpload = null;
+      return;
+    }
+    this.fileValid = true;
+
     let file: File = e.target.files[0];
     this.fileToUpload = file;
   }
