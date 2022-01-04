@@ -7,6 +7,7 @@
 <ion-content>
   <ion-list class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
     <form (ngSubmit)="login()" [formGroup]="credentials">
+      <img width="300vw" height="auto" src="/assets/images/home_cinema.png"/>
       <div class="input-group">
         <ion-item>
           <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
@@ -26,7 +27,7 @@
    
       <ion-button type="submit" expand="block" [disabled]="!credentials.valid">Log in</ion-button>
       
-      <ion-button type="button" expand="block" color="light" fill="clear" [routerLink]="['/register']">Not yet a member? Sign up!
+      <ion-button type="button" expand="block" fill="clear" [routerLink]="['/register']">Not yet a member? Sign up!
       </ion-button>
    
       <ion-button type="button" expand="block" color="tertiary">
@@ -39,7 +40,7 @@
         Sign in with Apple
       </ion-button>
 
-      <ion-button type="button" expand="block" color="light" fill="clear" [routerLink]="['/tabs/home']">Skip for now
+      <ion-button type="button" expand="block" fill="clear" [routerLink]="['/tabs/home']">Skip for now
       </ion-button>
 
     </form>
