@@ -6,7 +6,6 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { LocalAuthGuard } from "./auth/local-auth.guard";
 
 @ApiTags('auth')
-@ApiBearerAuth()
 @Controller()
 export class AppController {
     constructor(private authService: AuthService) {}
@@ -20,6 +19,7 @@ export class AppController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiOperation({summary: 'Get profile for logged User'})
     @Get('profile')
     getProfile(@Request() req) {
