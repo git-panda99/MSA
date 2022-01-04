@@ -12,6 +12,7 @@ export class AppController {
     constructor(private authService: AuthService) {}
 
     @UseGuards(LocalAuthGuard)
+    @ApiOperation({summary: 'Login User with email and password'})
     @Post('auth/login')
     async login(@Body() auth: Auth) {
         console.log("this is req "+auth);
@@ -19,6 +20,7 @@ export class AppController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @ApiOperation({summary: 'Get profile for logged User'})
     @Get('profile')
     getProfile(@Request() req) {
         return req.user.payload;
