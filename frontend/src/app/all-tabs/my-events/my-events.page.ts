@@ -28,7 +28,7 @@ export class MyEventsPage {
   }
 
   deleteEventVideo(eventVideo, i) {
-    if (window.confirm('Do you want to delete user?')) {
+    if (window.confirm('Do you want to delete event '+ eventVideo.title +'?')) {
       this.eventVideoService.deleteEventVideo(eventVideo.id)
         .subscribe(() => {
           this.EventVideos.splice(i, 1);

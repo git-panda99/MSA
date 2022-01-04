@@ -8,11 +8,11 @@ import { MyEventsPage } from './my-events.page';
 const routes: Routes = [
   {path: '', component: MyEventsPage},
   {path: 'create-event', component: CreateEventPage},
-  //{path: 'update-event/:id', component: UpdateEventPage},
-  {
+  {path: 'update-event/:id', component: UpdateEventPage},
+  /*{
     path: 'update-event/:id',
     loadChildren: () => import('../../events/update-event/update-event.module').then( m => m.UpdateEventPageModule)
-  },
+  },*/
 ];
 
 @NgModule({
