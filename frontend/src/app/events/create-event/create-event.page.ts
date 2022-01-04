@@ -3,6 +3,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { catchError, tap } from 'rxjs/operators';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -51,6 +52,23 @@ export class CreateEventPage implements OnInit {
     }
     let file: File = e.target.files[0];
     this.fileToUpload = file;
+  }
+
+  modifyImage(f){
+    if(this.imageURL == null) {
+      this.uploadImage(f);
+    }
+    else {
+      this.removeImage(f);
+    }
+  }
+
+  removeImage(f){
+
+    this.http.delete(environment.api_url + '/files/' + this.imageURL);
+      console.log("Deleted image"+ this.imageURL);
+      this.imageURL = null;
+
   }
 
   uploadImage(f){
