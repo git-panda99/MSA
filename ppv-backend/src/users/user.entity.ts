@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class User {
@@ -25,4 +26,17 @@ export class User {
     @ApiProperty()
     @Column()
     imageUrl: string;
+
+    @BeforeInsert()
+    @BeforeUpdate()
+    async hashPassword() {
+        try {
+            const rounds = bcrypt.getRounds(this.password);
+            if (rounds === 0) {
+                this.password = await bcrypt.hash(this.password, 10);
+            }
+        } catch (error) {
+        this.password = await bcrypt.hash(this.password, 10);
+        }
+    }
 }
