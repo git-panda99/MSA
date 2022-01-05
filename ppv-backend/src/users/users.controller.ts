@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
-import { Public } from 'src/auth/public';
+import { Public } from 'src/auth/public.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
