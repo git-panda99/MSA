@@ -6,14 +6,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="userData" >
 
   <ion-list>
     <ion-list-header>
       <ion-avatar>
         <ion-icon name="image" size="large"></ion-icon>
       </ion-avatar>
-      <ion-title size="large">Username</ion-title>
+      <ion-title size="large">{{userData.user.username}}</ion-title>
     </ion-list-header>
 
 

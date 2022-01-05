@@ -1,7 +1,7 @@
 import { Injectable } from  '@angular/core';
 import { HttpClient, HttpHeaders } from  '@angular/common/http';
-import { switchMap, tap } from  'rxjs/operators';
-import { Observable, BehaviorSubject, from } from  'rxjs';
+import { catchError, switchMap, tap } from  'rxjs/operators';
+import { Observable, BehaviorSubject, from, of } from  'rxjs';
 
 import { User } from  '../../shared/user';
 import { environment } from 'src/environments/environment';
@@ -20,16 +20,10 @@ export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;
   url = environment.api_url;
+  public user: Observable<any>;;
  
   constructor(private http: HttpClient, private router: Router,  private  storage:  StorageService) {
-    this.init();
     this.loadToken();
-  }
-
-  async init() {
-    // If using a custom driver:
-    // await this.storage.defineDriver(MyCustomDriver)
-    await this.storage.create();
   }
  
   // Load accessToken on startup
@@ -38,14 +32,32 @@ export class AuthService {
     if (token && token.value) {
       this.currentAccessToken = token.value;
       this.isAuthenticated.next(true);
+      this.user = this.getUserData(token);
     } else {
       this.isAuthenticated.next(false);
     }
   }
  
   // Get our secret protected data
-  getSecretData() {
-    return this.http.get(`${this.url}/users/secret`);
+  getUserData(token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      })
+    }
+    return this.http.get(`${this.url}/profile`, httpOptions).pipe(
+      tap(_ => console.log(`Profile fetched`)),
+      catchError(this.handleError<User>(`Get Profile`))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      console.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
  
   // Create new user
@@ -57,11 +69,15 @@ export class AuthService {
   login(credentials: {email, password}): Observable<any> {
     return this.http.post(`${this.url}/auth/login`, credentials).pipe(
       switchMap((tokens: {access_token: string, refresh_token: string }) => {
+
         console.log("TOKEN ACCESS: "+ tokens.access_token);
         console.log("TOKENS REFRESH: "+ tokens.refresh_token);
         this.currentAccessToken = tokens.access_token;
         const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
         const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
+
+        this.user = this.getUserData(tokens.access_token);
+
         return from(Promise.all([storeAccess, storeRefresh]));
       }),
       tap(_ => {
@@ -77,6 +93,7 @@ export class AuthService {
         // Remove all stored tokens
         const deleteAccess = this.storage.remove("ACCESS_TOKEN_KEY");
         const deleteRefresh = this.storage.remove("REFRESH_TOKEN_KEY");
+        this.user = null;
         return from(Promise.all([deleteAccess, deleteRefresh]));
       }),
       tap(_ => {
