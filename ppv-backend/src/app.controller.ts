@@ -4,12 +4,14 @@ import { Auth } from "./auth/auth.entity";
 import { AuthService } from "./auth/auth.service";
 import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { LocalAuthGuard } from "./auth/local-auth.guard";
+import { Public } from "./auth/public.decorator";
 
 @ApiTags('auth')
 @Controller()
 export class AppController {
     constructor(private authService: AuthService) {}
 
+    @Public()
     @UseGuards(LocalAuthGuard)
     @ApiOperation({summary: 'Login User with email and password'})
     @Post('auth/login')
