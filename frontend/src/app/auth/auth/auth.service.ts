@@ -3,10 +3,10 @@ import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { switchMap, tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject, from } from  'rxjs';
 
-import { Storage } from  '@ionic/storage';
 import { User } from  '../../shared/user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/shared/storage.service';
 
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
@@ -21,8 +21,15 @@ export class AuthService {
   currentAccessToken = null;
   url = environment.api_url;
  
-  constructor(private http: HttpClient, private router: Router,  private  storage:  Storage) {
+  constructor(private http: HttpClient, private router: Router,  private  storage:  StorageService) {
+    this.init();
     this.loadToken();
+  }
+
+  async init() {
+    // If using a custom driver:
+    // await this.storage.defineDriver(MyCustomDriver)
+    await this.storage.create();
   }
  
   // Load accessToken on startup
@@ -49,10 +56,12 @@ export class AuthService {
   // Sign in a user and store access and refres token
   login(credentials: {email, password}): Observable<any> {
     return this.http.post(`${this.url}/auth/login`, credentials).pipe(
-      switchMap((tokens: {accessToken, refreshToken }) => {
-        this.currentAccessToken = tokens.accessToken;
-        const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.accessToken);
-        const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refreshToken);
+      switchMap((tokens: {access_token: string, refresh_token: string }) => {
+        console.log("TOKEN ACCESS: "+ tokens.access_token);
+        console.log("TOKENS REFRESH: "+ tokens.refresh_token);
+        this.currentAccessToken = tokens.access_token;
+        const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
+        const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
         return from(Promise.all([storeAccess, storeRefresh]));
       }),
       tap(_ => {
