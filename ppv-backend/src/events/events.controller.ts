@@ -2,6 +2,8 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { Public } from 'src/auth/public.decorator';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/roles.decorator';
 import { Event } from './events.entity';
 import { EventsService } from './events.service';
 
@@ -37,6 +39,7 @@ export class EventsController implements CrudController<Event>{
 
     @Override('createOneBase')
     @ApiBearerAuth()
+    @Roles(Role.Organizer, Role.Admin)
     createOne(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: Event,
@@ -46,6 +49,7 @@ export class EventsController implements CrudController<Event>{
 
     @Override('createManyBase')
     @ApiBearerAuth()
+    @Roles(Role.Admin)
     createMany(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: CreateManyDto<Event>
@@ -55,6 +59,7 @@ export class EventsController implements CrudController<Event>{
 
     @Override('updateOneBase')
     @ApiBearerAuth()
+    @Roles(Role.Organizer, Role.Admin)
     updateOne(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: Event,
@@ -64,6 +69,7 @@ export class EventsController implements CrudController<Event>{
 
     @Override('replaceOneBase')
     @ApiBearerAuth()
+    @Roles(Role.Admin)
     replaceOne(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: Event,
@@ -73,6 +79,7 @@ export class EventsController implements CrudController<Event>{
 
     @Override('deleteOneBase')
     @ApiBearerAuth()
+    @Roles(Role.Organizer, Role.Admin)
     async deleteOne(
         @ParsedRequest() req: CrudRequest,
     ) {
