@@ -1,7 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
+import { R } from '@nestjsx/crud/lib/crud';
 import { Public } from 'src/auth/public.decorator';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/roles.decorator';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
@@ -46,6 +49,7 @@ export class UsersController implements CrudController<User> {
 
     @Override('createManyBase')
     @ApiBearerAuth()
+    @Roles(Role.Admin)
     createMany(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: CreateManyDto<User>
@@ -64,6 +68,7 @@ export class UsersController implements CrudController<User> {
 
     @Override('replaceOneBase')
     @ApiBearerAuth()
+    @Roles(Role.Admin)
     replaceOne(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: User,
