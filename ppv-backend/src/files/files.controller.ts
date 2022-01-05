@@ -4,15 +4,16 @@ import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiTags } 
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from 'fs';
+import { Public } from 'src/auth/public.decorator';
 
 @ApiTags('files')
 @Controller('files')
-@ApiBearerAuth()
 export class FilesController {
     
     @Post('upload')
     @ApiConsumes('multipart/form-data')
     @ApiOperation({summary: 'Upload a single File'})
+    @ApiBearerAuth()
     @ApiBody({
         type: 'multipart/form-data',
         required: true,
@@ -78,6 +79,7 @@ export class FilesController {
         type: 'string',
         description: 'Get the image path',
       })
+    @Public()
     seeUploadedFile(@Param('imgpath') image, @Res() res) {
         return res.sendFile(image, { root: './uploads' });
     }
@@ -89,6 +91,7 @@ export class FilesController {
       type: 'string',
       description: 'Delete image with FileName',
     })
+    @ApiBearerAuth()
     deletePicture(@Param('fileName') fileName: string) {
       var path = 'uploads\\'+fileName; //works on windows may have errors different OS
       return fs.unlink(path, (err) => {
