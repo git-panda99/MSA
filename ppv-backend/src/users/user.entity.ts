@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { Role } from "src/auth/role.enum";
 
 @Entity()
 export class User {
@@ -20,8 +21,8 @@ export class User {
     email: string;
 
     @ApiProperty()
-    @Column()
-    role: number;
+    @Column({ type: 'enum', enum: Role, default: Role.User })
+    roles: Role;
 
     @ApiProperty()
     @Column()
