@@ -32,18 +32,18 @@ export class AuthService {
     if (token && token.value) {
       this.currentAccessToken = token.value;
       this.isAuthenticated.next(true);
-      this.user = this.getUserData(token);
+      this.user =  this.getProfileData();
     } else {
       this.isAuthenticated.next(false);
     }
   }
  
   // Get our secret protected data
-  getUserData(token: string) {
+  getProfileData() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${this.currentAccessToken}`
       })
     }
     return this.http.get(`${this.url}/profile`, httpOptions).pipe(
@@ -76,7 +76,7 @@ export class AuthService {
         const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
         const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
 
-        this.user = this.getUserData(tokens.access_token);
+        this.user = this.getProfileData();
 
         return from(Promise.all([storeAccess, storeRefresh]));
       }),

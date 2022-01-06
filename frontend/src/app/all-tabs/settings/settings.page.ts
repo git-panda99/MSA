@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth/auth.service';
-import { User } from 'src/app/shared/user';
 
 @Component({
   selector: 'app-settings',
@@ -9,8 +8,7 @@ import { User } from 'src/app/shared/user';
   styleUrls: ['settings.page.scss']
 })
 export class SettingsPage {
-  User: Observable<any>;
-  userData: User;
+  userData: any;
   
   constructor(private authService: AuthService) {
   }
