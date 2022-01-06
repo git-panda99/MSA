@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-settings',
@@ -10,10 +11,12 @@ import { AuthService } from 'src/app/auth/auth/auth.service';
 })
 export class SettingsPage {
   userData: any;
+  apiUrl: string;
   
   constructor(private authService: AuthService,
     private router: Router
     ) {
+      this.apiUrl = environment.api_url;
   }
 
   ionViewWillEnter() {

@@ -18,9 +18,9 @@
 <ion-content fullscreen="true" slot="fixed" *ngIf="userData!=null" >
     <div class="card"  >
       <div class="header">
-        <div class="avatar">
+        <ion-avatar>
           <img [src]="apiUrl+'/files/'+userData.user.imageUrl" alt="">
-        </div>
+        </ion-avatar>
       </div>
       <div class="card-body">
         <div class="user-meta ion-text-center">
