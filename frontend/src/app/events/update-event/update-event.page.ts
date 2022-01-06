@@ -150,4 +150,15 @@ export class UpdateEventPage implements OnInit {
     this.typeValue = option.target.value;
   }
 
+  deleteEventVideo() {
+    if (window.confirm('Do you want to delete event '+ this.updateEventVideoForm.value.title +'?')) {
+      this.eventVideoAPI.deleteEventVideo(this.id)
+        .subscribe(() => {
+          console.log('Event deleted!')
+          this.router.navigate(['/tabs/my-events']);
+        }
+        )
+    }
+  }
+
 }
