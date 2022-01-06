@@ -1,9 +1,10 @@
 import { Controller, Delete, Get, Param, Post, Res, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from 'fs';
+import { Public } from 'src/auth/public.decorator';
 
 @ApiTags('files')
 @Controller('files')
@@ -11,6 +12,8 @@ export class FilesController {
     
     @Post('upload')
     @ApiConsumes('multipart/form-data')
+    @ApiOperation({summary: 'Upload a single File'})
+    @ApiBearerAuth()
     @ApiBody({
         type: 'multipart/form-data',
         required: true,
@@ -70,21 +73,25 @@ export class FilesController {
     }
     */
     @Get(':imgpath')
+    @ApiOperation({summary: 'Get a single File'})
     @ApiParam({
         name: 'imgpath',
         type: 'string',
         description: 'Get the image path',
       })
+    @Public()
     seeUploadedFile(@Param('imgpath') image, @Res() res) {
         return res.sendFile(image, { root: './uploads' });
     }
 
     @Delete(':fileName')
+    @ApiOperation({summary: 'Delete a single File'})
     @ApiParam({
       name: 'fileName',
       type: 'string',
       description: 'Delete image with FileName',
     })
+    @ApiBearerAuth()
     deletePicture(@Param('fileName') fileName: string) {
       var path = 'uploads\\'+fileName; //works on windows may have errors different OS
       return fs.unlink(path, (err) => {

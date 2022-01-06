@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { Ticket } from './ticket.entity';
 import { TicketsService } from './tickets.service';
@@ -10,6 +10,7 @@ import { TicketsService } from './tickets.service';
     }
 })
 @ApiTags('tickets')
+@ApiBearerAuth()
 @Controller('tickets')
 export class TicketsController implements CrudController<Ticket>{
     constructor(public service: TicketsService) {}
