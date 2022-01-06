@@ -80,10 +80,9 @@ export class CreateEventPage implements OnInit {
   }
 
   removeImage(f){
-
     this.http.delete(environment.api_url + '/files/' + this.imageURL);
-      console.log("Deleted image"+ this.imageURL);
-      this.imageURL = null;
+    console.log("Deleted image"+ this.imageURL);
+    this.imageURL = null;
 
   }
 
@@ -129,6 +128,12 @@ export class CreateEventPage implements OnInit {
           })
         });
     }
+  }
+
+  clearData(f) {
+    this.removeImage(f);
+
+    this.router.navigate(['/tabs/my-events']);
   }
 
 }
