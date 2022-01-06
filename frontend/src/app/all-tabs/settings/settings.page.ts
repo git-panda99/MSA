@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth/auth.service';
 
@@ -10,7 +11,9 @@ import { AuthService } from 'src/app/auth/auth/auth.service';
 export class SettingsPage {
   userData: any;
   
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+    private router: Router
+    ) {
   }
 
   ionViewWillEnter() {
@@ -22,7 +25,7 @@ export class SettingsPage {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout();    
   }
 
 }

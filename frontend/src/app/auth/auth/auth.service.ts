@@ -11,13 +11,6 @@ import { StorageService } from 'src/app/shared/storage.service';
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
 
-const PROFILE_ID = 'my-profile-id';
-const PROFILE_EMAIL = 'my-profile-email';
-const PROFILE_PICTURE = 'my-profile-picture';
-const PROFILE_ROLE = 'my-profile-role';
-const PROFILE_USERNAME = 'my-profile-username';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +18,12 @@ export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;
   url = environment.api_url;
-  public user: Observable<any>;;
+  public user: Observable<any>;
+  public profile_id: number;
+  public profile_email: string;
+  public profile_picture: string;
+  public profile_role: number;
+  public profile_username: string;
  
   constructor(private http: HttpClient, private router: Router,  private  storage:  StorageService) {
     this.loadToken();
@@ -58,36 +56,32 @@ export class AuthService {
     );
 
     this.user.subscribe((res) => {
-      console.log("got user: " + res.user.username)
-      console.log(res)
-      const storeId = this.storage.set("PROFILE_ID", res.user.id);
-      const storeEmail = this.storage.set("PROFILE_EMAIL", res.user.email);
-      const storePicture = this.storage.set("PROFILE_PICTURE", res.user.imageUrl);
-      const storeRole = this.storage.set("PROFILE_ROLE", res.user.role);
-      const storeUsername = this.storage.set("PROFILE_USERNAME", res.user.username);
-
-      return from(Promise.all([storeId, storeEmail, storePicture, storeRole, storeUsername]));
-    })
+      this.profile_id = res.user.id;
+      this.profile_email = res.user.email;
+      this.profile_picture = res.user.picture;
+      this.profile_role = res.user.role;
+      this.profile_username = res.user.username;
+    });
   }
 
   async getProfileId(){
-    return await this.storage.get("PROFILE_ID");
+    return this.profile_id;
   }
 
   async getProfileEmail(){
-    return await this.storage.get("PROFILE_EMAIL");
+    return this.profile_email;
   }
 
   async getProfilePicture(){
-    return await this.storage.get("PROFILE_PICTURE");
+    return this.profile_picture;
   }
 
   async getProfileRole(){
-    return await this.storage.get("PROFILE_ROLE");
+    return this.profile_role;
   }
 
   async getProfileUsername(){
-    return await this.storage.get("PROFILE_USERNAME");
+    return this.profile_username;
   }
  
 
@@ -114,7 +108,7 @@ export class AuthService {
         this.currentAccessToken = tokens.access_token;
         const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
         const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
-
+        
         this.getProfileData();
 
         return from(Promise.all([storeAccess, storeRefresh]));
@@ -126,20 +120,24 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(`${this.url}/auth/logout`, {}).pipe(
-      switchMap(_ => {
-        this.currentAccessToken = null;
-        // Remove all stored tokens
-        const deleteAccess = this.storage.remove("ACCESS_TOKEN_KEY");
-        const deleteRefresh = this.storage.remove("REFRESH_TOKEN_KEY");
-        this.user = null;
-        return from(Promise.all([deleteAccess, deleteRefresh]));
-      }),
-      tap(_ => {
-        this.isAuthenticated.next(false);
-        this.router.navigateByUrl('/', { replaceUrl: true });
-      })
-    ).subscribe();
+    this.currentAccessToken = null;
+    // Remove all stored tokens
+    const deleteAccess = this.storage.remove("ACCESS_TOKEN_KEY");
+    const deleteRefresh = this.storage.remove("REFRESH_TOKEN_KEY");
+    this.storage.clear();
+
+    this.user = null;
+    this.profile_id = null;
+    this.profile_email = null;
+    this.profile_picture = null;
+    this.profile_role = null;
+    this.profile_username = null;
+    
+    this.router.navigate(['/tabs/home']);
+    this.isAuthenticated.next(false);
+
+    return from(Promise.all([deleteAccess, deleteRefresh]));
+    
   }
   
   // Load the refresh token from storage
