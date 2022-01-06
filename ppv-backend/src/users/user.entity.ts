@@ -10,7 +10,11 @@ export class User {
 
     @ApiProperty()
     @Column()
-    username: string;
+    firstName: string;
+
+    @ApiProperty()
+    @Column()
+    lastName: string;
 
     @ApiProperty()
     @Column()
@@ -23,6 +27,10 @@ export class User {
     @ApiProperty()
     @Column({ type: 'enum', enum: Role, default: Role.User })
     roles: Role;
+
+    @ApiProperty()
+    @Column()
+    description: string;
 
     @ApiProperty()
     @Column()
