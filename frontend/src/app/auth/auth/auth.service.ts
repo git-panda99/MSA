@@ -11,6 +11,11 @@ import { StorageService } from 'src/app/shared/storage.service';
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
 
+const PROFILE_ID = 'my-profile-id';
+const PROFILE_EMAIL = 'my-profile-email';
+const PROFILE_PICTURE = 'my-profile-picture';
+const PROFILE_ROLE = 'my-profile-role';
+const PROFILE_USERNAME = 'my-profile-username';
 
 
 @Injectable({
@@ -32,11 +37,12 @@ export class AuthService {
     if (token && token.value) {
       this.currentAccessToken = token.value;
       this.isAuthenticated.next(true);
-      this.user =  this.getProfileData();
+      this.getProfileData();
     } else {
       this.isAuthenticated.next(false);
     }
   }
+
  
   // Get our secret protected data
   getProfileData() {
@@ -46,11 +52,44 @@ export class AuthService {
         Authorization: `Bearer ${this.currentAccessToken}`
       })
     }
-    return this.http.get(`${this.url}/profile`, httpOptions).pipe(
+    this.user = this.http.get(`${this.url}/profile`, httpOptions).pipe(
       tap(_ => console.log(`Profile fetched`)),
       catchError(this.handleError<User>(`Get Profile`))
     );
+
+    this.user.subscribe((res) => {
+      console.log("got user: " + res.user.username)
+      console.log(res)
+      const storeId = this.storage.set("PROFILE_ID", res.user.id);
+      const storeEmail = this.storage.set("PROFILE_EMAIL", res.user.email);
+      const storePicture = this.storage.set("PROFILE_PICTURE", res.user.imageUrl);
+      const storeRole = this.storage.set("PROFILE_ROLE", res.user.role);
+      const storeUsername = this.storage.set("PROFILE_USERNAME", res.user.username);
+
+      return from(Promise.all([storeId, storeEmail, storePicture, storeRole, storeUsername]));
+    })
   }
+
+  async getProfileId(){
+    return await this.storage.get("PROFILE_ID");
+  }
+
+  async getProfileEmail(){
+    return await this.storage.get("PROFILE_EMAIL");
+  }
+
+  async getProfilePicture(){
+    return await this.storage.get("PROFILE_PICTURE");
+  }
+
+  async getProfileRole(){
+    return await this.storage.get("PROFILE_ROLE");
+  }
+
+  async getProfileUsername(){
+    return await this.storage.get("PROFILE_USERNAME");
+  }
+ 
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -76,7 +115,7 @@ export class AuthService {
         const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
         const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
 
-        this.user = this.getProfileData();
+        this.getProfileData();
 
         return from(Promise.all([storeAccess, storeRefresh]));
       }),

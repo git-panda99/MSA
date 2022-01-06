@@ -41,10 +41,9 @@
       </ion-item>
       
       <br>
-      <!--
       <br>
       <ion-list>
-        <ion-radio-group value="biff" formControlName="type" required ngDefaultControl>
+        <ion-radio-group value="biff" formControlName="type" (ionChange)="onSelectType($event)" ngDefaultControl>
           <ion-list-header>
             <ion-label>Event type:</ion-label>
           </ion-list-header>
@@ -65,7 +64,7 @@
           </ion-item>
         </ion-radio-group>
       </ion-list>
-      -->
+
       <br>
       <ion-item>
         <ion-label>Start time:</ion-label>
@@ -98,7 +97,7 @@
       <br>
       <ion-item>
         <ion-label>Link type:</ion-label>
-        <ion-select formControlName="source" (ionChange)="onSelect($event)" ngDefaultControl >
+        <ion-select formControlName="source" (ionChange)="onSelectSource($event)" ngDefaultControl >
           <ion-select-option value=".m3u8">.m3u8</ion-select-option>
           <ion-select-option value="youtube">youtube</ion-select-option>
         </ion-select>

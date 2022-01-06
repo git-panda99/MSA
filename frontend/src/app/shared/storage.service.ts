@@ -22,10 +22,9 @@ export class StorageService {
   // call, for example:
   public async set(key: string, value: any) {
     await this._storage?.set(key, value);
-    console.log("SET "+key+" "+this.storage.get(key));
   }
 
-  public  async get(key: string) {
+  public async get(key: string) {
     return  await this._storage?.get(key);
   }
   

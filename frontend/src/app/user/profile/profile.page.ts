@@ -40,7 +40,7 @@ export class ProfilePage implements OnInit {
   }
 
   getProfileData() {
-    this.authService.getProfileData().subscribe(res => {
+    this.authService.user.subscribe(res => {
       this.userData = res;
       this.profileImageUrl = this.apiUrl+'/files/'+ this.userData?.user?.imageUrl;
       this.updateUserForm.setValue({

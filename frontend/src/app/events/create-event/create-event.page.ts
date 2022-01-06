@@ -3,6 +3,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth/auth.service';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,10 +15,11 @@ import { environment } from 'src/environments/environment';
 })
 export class CreateEventPage implements OnInit {
   selectValue: string;
+  typeValue: string;
 
   eventForm: FormGroup;
   fileToUpload: File = null;
-  userId = null;
+  userId: any;
   imageURL: string;
   apiUrl: string;
   fileValid: boolean = false;
@@ -28,7 +30,8 @@ export class CreateEventPage implements OnInit {
     private router: Router,
     public fb: FormBuilder,
     private zone: NgZone,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) {
     this.apiUrl = environment.api_url;
     this.eventForm = this.fb.group({
@@ -40,9 +43,12 @@ export class CreateEventPage implements OnInit {
       endDate: "2012-10-25T12:00:00.000Z",
       type: "",
       source: "",
-      videoUrl: ""
-
+      videoUrl: "",
+      userId: 100,
     })
+    this.userId = authService.getProfileId().then( (res) => {
+      this.userId = res;
+    });
   }
 
   ngOnInit() { }
@@ -54,7 +60,6 @@ export class CreateEventPage implements OnInit {
     }
 
     if (!e.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
-      console.log('not an image: '+ e.target.files[0].name);
       this.fileValid = false;
       this.fileToUpload = null;
       return;
@@ -92,11 +97,18 @@ export class CreateEventPage implements OnInit {
     });
   }
 
-  onSelect(option) {
+  onSelectSource(option) {
     if (option.value=="") {
       return;
     }
     this.selectValue = option.target.value;
+  }
+
+  onSelectType(option) {
+    if (option.value=="") {
+      return;
+    }
+    this.typeValue = option.target.value;
   }
 
   onFormSubmit() {
@@ -106,6 +118,8 @@ export class CreateEventPage implements OnInit {
     } else {
       this.eventForm.value.posterUrl = this.imageURL;
       this.eventForm.value.source = this.selectValue;
+      this.eventForm.value.type = this.typeValue;
+      this.eventForm.value.userId = this.userId;
       this.eventVidoeAPI.addEventVideo(this.eventForm.value)
         .subscribe((res) => {
           this.zone.run(() => {
