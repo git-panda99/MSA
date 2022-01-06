@@ -13,9 +13,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./update-event.page.scss'],
 })
 export class UpdateEventPage implements OnInit {
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  typeValue: string;
+  selectValue: string;
   
   fileValid: boolean = false;
   imageURL: string;
@@ -74,6 +73,9 @@ export class UpdateEventPage implements OnInit {
       return false;
     } else {
       this.updateEventVideoForm.value.posterUrl = this.imageURL;
+      this.updateEventVideoForm.value.source = this.selectValue;
+      this.updateEventVideoForm.value.type = this.typeValue;
+
       this.eventVideoAPI.updateEventVideo(this.id, this.updateEventVideoForm.value)
         .subscribe((res) => {
           console.log(res)
@@ -132,6 +134,20 @@ export class UpdateEventPage implements OnInit {
     console.log(res);
     this.imageURL = res['filename'];
     });
+  }
+
+  onSelectSource(option) {
+    if (option.value=="") {
+      return;
+    }
+    this.selectValue = option.target.value;
+  }
+
+  onSelectType(option) {
+    if (option.value=="") {
+      return;
+    }
+    this.typeValue = option.target.value;
   }
 
 }

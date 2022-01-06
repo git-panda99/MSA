@@ -38,10 +38,9 @@
         <ion-input placeholder="Event Title" formControlName="title" type="text" required ngDefaultControl></ion-input>
       </ion-item>
       
-      <!--
       <br>
       <ion-list>
-        <ion-radio-group value="biff" formControlName="type" required ngDefaultControl>
+        <ion-radio-group value="biff" formControlName="type" (ionChange)="onSelectType($event)" ngDefaultControl>
           <ion-list-header>
             <ion-label>Event type:</ion-label>
           </ion-list-header>
@@ -62,7 +61,7 @@
           </ion-item>
         </ion-radio-group>
       </ion-list>
-      -->
+
       <br>
       <ion-item>
         <ion-label>Start time:</ion-label>
@@ -91,16 +90,16 @@
         <ion-label>Description:</ion-label>
         <ion-textarea placeholder="Enter Event Description..." formControlName="description" required ngDefaultControl></ion-textarea>
       </ion-item>
-      <!--
+      
       <br>
       <ion-item>
         <ion-label>Link type:</ion-label>
-        <ion-select placeholder="Select One" formControlName="source" required ngDefaultControl>
+        <ion-select placeholder="Select One" formControlName="source" (ionChange)="onSelectSource($event)" ngDefaultControl>
           <ion-select-option value=".m3u8">.m3u8</ion-select-option>
           <ion-select-option value="youtube">youtube</ion-select-option>
         </ion-select>
       </ion-item>
-      -->
+      
       <br>
       <ion-item>
         <ion-label>Link:</ion-label>
