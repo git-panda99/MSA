@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth/auth.service';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -21,6 +22,7 @@ export class UpdateEventPage implements OnInit {
   fileToUpload: File = null;
 
   apiUrl: string;
+  httpOptions: any;
 
   updateEventVideoForm: FormGroup;
   id: any;
@@ -30,8 +32,15 @@ export class UpdateEventPage implements OnInit {
     private eventVideoAPI: EventVideoService,
     private actRoute: ActivatedRoute,
     private router: Router,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private authService: AuthService
   ) {
+    this.authService.getCurrentAccessToken().then((res) => {
+      this.httpOptions = { headers: new HttpHeaders({ 
+        'Authorization': `Bearer ${res}`
+      })}
+    });
+
     this.apiUrl = environment.api_url;
     this.id = this.actRoute.snapshot.paramMap.get('id');
   }
@@ -113,7 +122,9 @@ export class UpdateEventPage implements OnInit {
   }
 
   removeImage(f){
-    this.http.delete(environment.api_url + '/files/' + this.imageURL);
+    this.http.delete(environment.api_url + '/files/' + this.imageURL, this.httpOptions).subscribe((res) => {
+      console.log(res);
+      });
     console.log("Deleted image"+ this.imageURL);
     this.imageURL = null;
 
@@ -129,7 +140,7 @@ export class UpdateEventPage implements OnInit {
   uploadImage(f){
     let formData = new FormData(); 
     formData.append('file', this.fileToUpload, this.fileToUpload.name); 
-    this.http.post(environment.api_url+'/files/upload', formData).subscribe((res) => {
+    this.http.post(environment.api_url+'/files/upload', formData, this.httpOptions).subscribe((res) => {
 
     console.log(res);
     this.imageURL = res['filename'];

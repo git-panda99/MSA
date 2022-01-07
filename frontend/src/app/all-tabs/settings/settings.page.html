@@ -13,7 +13,7 @@
             <ion-avatar slot="end">
               <ion-img [src]="apiUrl+'/files/'+userData.user.imageUrl"></ion-img>
             </ion-avatar>        
-            <ion-title>{{userData.user.username}}</ion-title>
+            <ion-title>{{userData.user.firstName}} {{userData.user.lastName}}</ion-title>
           </ion-item>
           <ion-item button routerLink="./profile/">
             <ion-icon name="person" slot="start"></ion-icon>

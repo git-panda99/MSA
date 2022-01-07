@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ViewWillLeave } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth/auth.service';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
@@ -16,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class CreateEventPage implements OnInit {
   selectValue: string;
   typeValue: string;
+  httpOptions: any;
 
   eventForm: FormGroup;
   fileToUpload: File = null;
@@ -33,6 +35,11 @@ export class CreateEventPage implements OnInit {
     private sanitizer: DomSanitizer,
     private authService: AuthService
   ) {
+    this.authService.getCurrentAccessToken().then((res) => {
+        this.httpOptions = { headers: new HttpHeaders({ 
+          'Authorization': `Bearer ${res}`
+        })}
+      });
     this.apiUrl = environment.api_url;
     this.eventForm = this.fb.group({
       title: [''],
@@ -45,7 +52,7 @@ export class CreateEventPage implements OnInit {
       source: "",
       videoUrl: "",
       userId: 100,
-    })
+    });
     this.userId = authService.getProfileId().then( (res) => {
       this.userId = res;
     });
@@ -80,7 +87,9 @@ export class CreateEventPage implements OnInit {
   }
 
   removeImage(f){
-    this.http.delete(environment.api_url + '/files/' + this.imageURL);
+    this.http.delete(environment.api_url + '/files/' + this.imageURL, this.httpOptions).subscribe((res) => {
+      console.log(res);
+      });
     console.log("Deleted image"+ this.imageURL);
     this.imageURL = null;
 
@@ -89,7 +98,7 @@ export class CreateEventPage implements OnInit {
   uploadImage(f){
     let formData = new FormData(); 
     formData.append('file', this.fileToUpload, this.fileToUpload.name); 
-    this.http.post(environment.api_url+'/files/upload', formData).subscribe((res) => {
+    this.http.post(environment.api_url+'/files/upload', formData, this.httpOptions).subscribe((res) => {
 
     console.log(res);
     this.imageURL = res['filename'];
@@ -134,6 +143,10 @@ export class CreateEventPage implements OnInit {
     this.removeImage(f);
 
     this.router.navigate(['/tabs/my-events']);
+  }
+
+  ionViewWillLeave() {
+    this.clearData(null)
   }
 
 }

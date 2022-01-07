@@ -4,16 +4,24 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventVideoService {
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  httpOptions: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+      this.authService.getCurrentAccessToken().then(
+        (res) => {
+          this.httpOptions = { headers: new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${res}`
+          })}
+        }
+      )
+   }
 
   addEventVideo(event: EventVideo): Observable<any> {
     return this.http.post<EventVideo>(environment.api_url+'/events', event, this.httpOptions)
@@ -46,7 +54,7 @@ export class EventVideoService {
       );
   }
 
-  deleteEventVideo(id): Observable<EventVideo[]> {
+  deleteEventVideo(id){
     return this.http.delete<EventVideo[]>(environment.api_url + '/events/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Event deleted: ${id}`)),

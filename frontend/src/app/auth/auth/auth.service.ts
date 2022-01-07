@@ -22,8 +22,9 @@ export class AuthService {
   public profile_id: number;
   public profile_email: string;
   public profile_picture: string;
-  public profile_role: number;
-  public profile_username: string;
+  public profile_roles: number;
+  public profile_firstName: string;
+  public profile_lastName: string;
  
   constructor(private http: HttpClient, private router: Router,  private  storage:  StorageService) {
     this.loadToken();
@@ -59,8 +60,9 @@ export class AuthService {
       this.profile_id = res.user.id;
       this.profile_email = res.user.email;
       this.profile_picture = res.user.picture;
-      this.profile_role = res.user.role;
-      this.profile_username = res.user.username;
+      this.profile_roles = res.user.roles;
+      this.profile_firstName = res.user.firstName;
+      this.profile_lastName = res.user.lastName;
     });
   }
 
@@ -76,12 +78,20 @@ export class AuthService {
     return this.profile_picture;
   }
 
-  async getProfileRole(){
-    return this.profile_role;
+  async getProfileRoles(){
+    return this.profile_roles;
   }
 
-  async getProfileUsername(){
-    return this.profile_username;
+  async getProfileFirstName(){
+    return this.profile_firstName;
+  }
+
+  async getProfileLastName(){
+    return this.profile_lastName;
+  }
+
+  async getCurrentAccessToken(){
+    return await this.storage.get("ACCESS_TOKEN_KEY");
   }
  
 
@@ -130,8 +140,9 @@ export class AuthService {
     this.profile_id = null;
     this.profile_email = null;
     this.profile_picture = null;
-    this.profile_role = null;
-    this.profile_username = null;
+    this.profile_roles = null;
+    this.profile_firstName = null;
+    this.profile_lastName = null;
     
     this.router.navigate(['/tabs/home']);
     this.isAuthenticated.next(false);

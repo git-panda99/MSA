@@ -31,10 +31,11 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.getProfileData();
     this.updateUserForm = this.fb.group({
-      username: [""],
+      firstName: [""],
+      lastName: [""],
       password: [""],
       email: [""],
-      role: 0,
+      roles: [""],
       imageUrl: [""]
     })
   }
@@ -44,10 +45,11 @@ export class ProfilePage implements OnInit {
       this.userData = res;
       this.profileImageUrl = this.apiUrl+'/files/'+ this.userData?.user?.imageUrl;
       this.updateUserForm.setValue({
-        username: this.userData.user.username,
+        firstName: this.userData.user.firstName,
+        lastName: this.userData.user.lastName,
         password: [""],
         email: this.userData.user.email,
-        role: this.userData.user.role,
+        roles: this.userData.user.roles,
         imageUrl: this.userData.user.imageUrl
       });
     });
