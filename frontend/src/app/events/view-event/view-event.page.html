@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>view-event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="eventVideo">
+  <img *ngIf="eventVideo.posterUrl" [src]="apiUrl+'/files/'+eventVideo.posterUrl"/>
+  {{eventVideo?.title}}
+  {{eventVideo.description}}
+  {{eventVideo.price}}
+  {{eventVideo.beginDate}}
+  {{eventVideo.endDate}}
+  {{eventVideo.type}}
+  {{eventVideo.source}}
+  {{eventVideo.videoUrl}}
+
+</ion-content>

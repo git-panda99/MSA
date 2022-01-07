@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IonicStorageModule } from '@ionic/storage';
-
 
 
 
@@ -14,7 +12,6 @@ import { IonicStorageModule } from '@ionic/storage';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    IonicStorageModule.forRoot(),
     ReactiveFormsModule
   ]
 })

@@ -1,17 +1,15 @@
 import { Injectable } from  '@angular/core';
 import { HttpClient, HttpHeaders } from  '@angular/common/http';
-import { switchMap, tap } from  'rxjs/operators';
-import { Observable, BehaviorSubject, from } from  'rxjs';
+import { catchError, switchMap, tap } from  'rxjs/operators';
+import { Observable, BehaviorSubject, from, of } from  'rxjs';
 
-import { Storage } from  '@ionic/storage';
 import { User } from  '../../shared/user';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/shared/storage.service';
 
 const ACCESS_TOKEN_KEY = 'my-access-token';
 const REFRESH_TOKEN_KEY = 'my-refresh-token';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +18,14 @@ export class AuthService {
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   currentAccessToken = null;
   url = environment.api_url;
+  public user: Observable<any>;
+  public profile_id: number;
+  public profile_email: string;
+  public profile_picture: string;
+  public profile_role: number;
+  public profile_username: string;
  
-  constructor(private http: HttpClient, private router: Router,  private  storage:  Storage) {
+  constructor(private http: HttpClient, private router: Router,  private  storage:  StorageService) {
     this.loadToken();
   }
  
@@ -31,14 +35,62 @@ export class AuthService {
     if (token && token.value) {
       this.currentAccessToken = token.value;
       this.isAuthenticated.next(true);
+      this.getProfileData();
     } else {
       this.isAuthenticated.next(false);
     }
   }
+
  
   // Get our secret protected data
-  getSecretData() {
-    return this.http.get(`${this.url}/users/secret`);
+  getProfileData() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.currentAccessToken}`
+      })
+    }
+    this.user = this.http.get(`${this.url}/profile`, httpOptions).pipe(
+      tap(_ => console.log(`Profile fetched`)),
+      catchError(this.handleError<User>(`Get Profile`))
+    );
+
+    this.user.subscribe((res) => {
+      this.profile_id = res.user.id;
+      this.profile_email = res.user.email;
+      this.profile_picture = res.user.picture;
+      this.profile_role = res.user.role;
+      this.profile_username = res.user.username;
+    });
+  }
+
+  async getProfileId(){
+    return this.profile_id;
+  }
+
+  async getProfileEmail(){
+    return this.profile_email;
+  }
+
+  async getProfilePicture(){
+    return this.profile_picture;
+  }
+
+  async getProfileRole(){
+    return this.profile_role;
+  }
+
+  async getProfileUsername(){
+    return this.profile_username;
+  }
+ 
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      console.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
  
   // Create new user
@@ -49,10 +101,16 @@ export class AuthService {
   // Sign in a user and store access and refres token
   login(credentials: {email, password}): Observable<any> {
     return this.http.post(`${this.url}/auth/login`, credentials).pipe(
-      switchMap((tokens: {accessToken, refreshToken }) => {
-        this.currentAccessToken = tokens.accessToken;
-        const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.accessToken);
-        const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refreshToken);
+      switchMap((tokens: {access_token: string, refresh_token: string }) => {
+
+        console.log("TOKEN ACCESS: "+ tokens.access_token);
+        console.log("TOKENS REFRESH: "+ tokens.refresh_token);
+        this.currentAccessToken = tokens.access_token;
+        const storeAccess = this.storage.set("ACCESS_TOKEN_KEY", tokens.access_token);
+        const storeRefresh = this.storage.set("REFRESH_TOKEN_KEY", tokens.refresh_token);
+        
+        this.getProfileData();
+
         return from(Promise.all([storeAccess, storeRefresh]));
       }),
       tap(_ => {
@@ -62,19 +120,24 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(`${this.url}/auth/logout`, {}).pipe(
-      switchMap(_ => {
-        this.currentAccessToken = null;
-        // Remove all stored tokens
-        const deleteAccess = this.storage.remove("ACCESS_TOKEN_KEY");
-        const deleteRefresh = this.storage.remove("REFRESH_TOKEN_KEY");
-        return from(Promise.all([deleteAccess, deleteRefresh]));
-      }),
-      tap(_ => {
-        this.isAuthenticated.next(false);
-        this.router.navigateByUrl('/', { replaceUrl: true });
-      })
-    ).subscribe();
+    this.currentAccessToken = null;
+    // Remove all stored tokens
+    const deleteAccess = this.storage.remove("ACCESS_TOKEN_KEY");
+    const deleteRefresh = this.storage.remove("REFRESH_TOKEN_KEY");
+    this.storage.clear();
+
+    this.user = null;
+    this.profile_id = null;
+    this.profile_email = null;
+    this.profile_picture = null;
+    this.profile_role = null;
+    this.profile_username = null;
+    
+    this.router.navigate(['/tabs/home']);
+    this.isAuthenticated.next(false);
+
+    return from(Promise.all([deleteAccess, deleteRefresh]));
+    
   }
   
   // Load the refresh token from storage

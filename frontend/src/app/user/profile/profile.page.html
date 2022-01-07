@@ -1,0 +1,39 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="light">
+        <ion-icon slot="start" name="settings"></ion-icon>
+        Favorites
+      </ion-button>
+    </ion-buttons>
+    <ion-title>&nbsp;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="card"></ion-icon>
+       </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed" *ngIf="userData!=null" >
+    <div class="card"  >
+      <div class="header">
+        <ion-avatar>
+          <img [src]="apiUrl+'/files/'+userData.user.imageUrl" alt="">
+        </ion-avatar>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <h3 class="username">{{userData.user.username}}</h3>
+          <h5 class="role">User Role {{userData.user.role}}</h5>
+          <h6 class="likes">Likes <ion-chip>
+              <ion-label>2</ion-label>
+            </ion-chip>
+          </h6>
+        </div>
+
+        <ion-button expand="full" color="primary">See the events</ion-button>
+        <ion-button expand="full" color="secondary">Edit profile</ion-button>
+      </div>
+    </div>
+</ion-content>

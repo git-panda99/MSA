@@ -3,6 +3,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth/auth.service';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,11 +14,15 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./create-event.page.scss'],
 })
 export class CreateEventPage implements OnInit {
+  selectValue: string;
+  typeValue: string;
+
   eventForm: FormGroup;
   fileToUpload: File = null;
-  userId = null;
+  userId: any;
   imageURL: string;
   apiUrl: string;
+  fileValid: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -25,7 +30,8 @@ export class CreateEventPage implements OnInit {
     private router: Router,
     public fb: FormBuilder,
     private zone: NgZone,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) {
     this.apiUrl = environment.api_url;
     this.eventForm = this.fb.group({
@@ -37,9 +43,12 @@ export class CreateEventPage implements OnInit {
       endDate: "2012-10-25T12:00:00.000Z",
       type: "",
       source: "",
-      videoUrl: ""
-
+      videoUrl: "",
+      userId: 100,
     })
+    this.userId = authService.getProfileId().then( (res) => {
+      this.userId = res;
+    });
   }
 
   ngOnInit() { }
@@ -49,8 +58,32 @@ export class CreateEventPage implements OnInit {
       console.log("No file selected!");
       return
     }
+
+    if (!e.target.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)) {
+      this.fileValid = false;
+      this.fileToUpload = null;
+      return;
+    }
+    this.fileValid = true;
+
     let file: File = e.target.files[0];
     this.fileToUpload = file;
+  }
+
+  modifyImage(f){
+    if(this.imageURL == null) {
+      this.uploadImage(f);
+    }
+    else {
+      this.removeImage(f);
+    }
+  }
+
+  removeImage(f){
+    this.http.delete(environment.api_url + '/files/' + this.imageURL);
+    console.log("Deleted image"+ this.imageURL);
+    this.imageURL = null;
+
   }
 
   uploadImage(f){
@@ -63,11 +96,29 @@ export class CreateEventPage implements OnInit {
     });
   }
 
+  onSelectSource(option) {
+    if (option.value=="") {
+      return;
+    }
+    this.selectValue = option.target.value;
+  }
+
+  onSelectType(option) {
+    if (option.value=="") {
+      return;
+    }
+    this.typeValue = option.target.value;
+  }
+
   onFormSubmit() {
+
     if (!this.eventForm.valid) {
       return false;
     } else {
       this.eventForm.value.posterUrl = this.imageURL;
+      this.eventForm.value.source = this.selectValue;
+      this.eventForm.value.type = this.typeValue;
+      this.eventForm.value.userId = this.userId;
       this.eventVidoeAPI.addEventVideo(this.eventForm.value)
         .subscribe((res) => {
           this.zone.run(() => {
@@ -77,6 +128,12 @@ export class CreateEventPage implements OnInit {
           })
         });
     }
+  }
+
+  clearData(f) {
+    this.removeImage(f);
+
+    this.router.navigate(['/tabs/my-events']);
   }
 
 }

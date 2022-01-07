@@ -20,8 +20,11 @@
               
               <ion-icon name="create" style="zoom:2.0"></ion-icon>
             </button>
-            <button ion-button clear (click)="deleteEventVideo(event, i)">
+            <button ion-button clear (click)="deleteEventVideo(event, event.id)">
               <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+            </button>
+            <button ion-button clear [routerLink]="['./event/', event.id]">
+              <ion-icon name="eye" style="zoom:2.0"></ion-icon>
             </button>
           </div>
         </ion-card-header>

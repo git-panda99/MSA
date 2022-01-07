@@ -18,7 +18,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full'
-  }
+  },  {
+    path: 'view-event',
+    loadChildren: () => import('./events/view-event/view-event.module').then( m => m.ViewEventPageModule)
+  },
+
 
 ];
 @NgModule({

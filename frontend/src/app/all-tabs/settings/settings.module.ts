@@ -7,6 +7,8 @@ import { SettingsPage } from './settings.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
+import { ProfilePage } from 'src/app/user/profile/profile.page';
+import { ProfilePageModule } from 'src/app/user/profile/profile.module';
 
 @NgModule({
   imports: [
@@ -16,6 +18,7 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: SettingsPage }]),
     SettingsPageRoutingModule,
+    ProfilePageModule
   ],
   declarations: [SettingsPage]
 })
