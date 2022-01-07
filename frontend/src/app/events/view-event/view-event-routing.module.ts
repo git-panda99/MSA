@@ -7,7 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: ViewEventPage
-  }
+  },
+  {
+    path: 'fullscreen',
+    loadChildren: () => import('../fullscreen/fullscreen.module').then( m => m.FullscreenPageModule)
+  },
+  {
+    path: 'embedded',
+    loadChildren: () => import('../embedded/embedded.module').then( m => m.EmbeddedPageModule)
+  },
 ];
 
 @NgModule({
