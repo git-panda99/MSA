@@ -145,6 +145,8 @@ export class AuthService {
     this.profile_lastName = null;
     
     this.router.navigate(['/tabs/home']);
+    this.router.navigate(['/tabs/home']);
+    this.router.navigate(['/tabs/home']);
     this.isAuthenticated.next(false);
 
     return from(Promise.all([deleteAccess, deleteRefresh]));

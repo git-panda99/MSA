@@ -15,22 +15,26 @@ const routes: Routes = [
       {
         path: 'search',
         loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule),
-        canLoad: [AuthGuard]
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always'
       },
       {
         path: 'my-tickets',
         loadChildren: () => import('../all-tabs/my-tickets/my-tickets.module').then(m => m.MyTicketsPageModule),
-        canLoad: [AuthGuard]
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always'
       },
       {
         path: 'my-events',
         loadChildren: () => import('../all-tabs/my-events/my-events.module').then(m => m.MyEventsPageModule),
-        canLoad: [AuthGuard]
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always'
       },
       {
         path: 'settings',
         loadChildren: () => import('../all-tabs/settings/settings.module').then(m => m.SettingsPageModule),
-        canLoad: [AuthGuard]
+        canActivate: [AuthGuard],
+        runGuardsAndResolvers: 'always'
       },
       {
         path: '',

@@ -18,7 +18,8 @@ const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full'
-  },  {
+  },
+  {
     path: 'view-event',
     loadChildren: () => import('./events/view-event/view-event.module').then( m => m.ViewEventPageModule)
   },
@@ -27,7 +28,7 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: 'reload'})
   ],
   exports: [RouterModule]
 })
