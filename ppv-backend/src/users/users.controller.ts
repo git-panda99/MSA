@@ -26,7 +26,6 @@ export class UsersController implements CrudController<User> {
     @Get(':email')
     async getByEmail(@Param('email') email: string) {
         const user = await this.service.findOne({ email });
-        console.log(user);
         if (user) {
           return user;
         }
