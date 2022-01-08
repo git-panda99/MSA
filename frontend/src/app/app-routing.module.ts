@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'view-event',
     loadChildren: () => import('./events/view-event/view-event.module').then( m => m.ViewEventPageModule)
+  },  {
+    path: 'fullscreen',
+    loadChildren: () => import('./events/fullscreen/fullscreen.module').then( m => m.FullscreenPageModule)
   },
+  {
+    path: 'embedded',
+    loadChildren: () => import('./events/embedded/embedded.module').then( m => m.EmbeddedPageModule)
+  },
+
 
 
 ];

@@ -4,15 +4,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="eventVideo">
-  <img *ngIf="eventVideo.posterUrl" [src]="apiUrl+'/files/'+eventVideo.posterUrl"/>
-  {{eventVideo?.title}}
-  {{eventVideo.description}}
-  {{eventVideo.price}}
-  {{eventVideo.beginDate}}
-  {{eventVideo.endDate}}
-  {{eventVideo.type}}
-  {{eventVideo.source}}
-  {{eventVideo.videoUrl}}
+<ion-content *ngIf="eventVideo" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img *ngIf="eventVideo.posterUrl" [src]="apiUrl+'/files/'+eventVideo.posterUrl"/>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-start">
+          <h2>{{eventVideo?.title}}</h2>
+          <h3>{{eventVideo.type}}</h3>
+          <h3>{{eventVideo.price}} lei </h3>
+          <p>{{eventVideo.beginDate}} - {{eventVideo.endDate}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <p>{{eventVideo.description}}</p>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="testVideoPlayerPlugin()" color='primary' expand="block">Play Video</ion-button>
 
 </ion-content>
