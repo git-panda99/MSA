@@ -7,12 +7,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+    <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
+    <ion-card>
+      <ion-card-header>
+        <img *ngIf="event.posterUrl" [src]="apiUrl+'/files/'+event.posterUrl" [routerLink]="['./event/', event.id]"/>
+        <ion-card-title [routerLink]="['./event/', event.id]">{{event.title}}</ion-card-title>
 
-  
-  <app-explore-container name="Home page"></app-explore-container>
+      </ion-card-header>
+    
+      <ion-card-content>
+       this is the id{{event.id}}....
+        {{event.description}}
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+  </ion-row>
+  </ion-grid> 
+
 </ion-content>
