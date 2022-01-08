@@ -67,8 +67,7 @@
 
       <br>
       <ion-item>
-        <ion-label>Start time:</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" min="2022" (ionChange)="onSelectBeginDate($event)"  formControlName="beginDate" required ngDefaultControl></ion-datetime>
+        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" min="2022" (ionChange)="onSelectBeginDate($event)"  formControlName="beginDate" required ngDefaultControl><div slot="title">Begin Date</div></ion-datetime>
       </ion-item>
 
       <ion-item>
@@ -78,8 +77,7 @@
 
       <br>
       <ion-item>
-        <ion-label>End time:</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" min="2022" (ionChange)="onSelectEndDate($event)" formControlName="endDate" required ngDefaultControl></ion-datetime>
+        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" min="2022" (ionChange)="onSelectEndDate($event)" formControlName="endDate" required ngDefaultControl><div slot="title">End Date</div></ion-datetime>
       </ion-item>
       
       <br>

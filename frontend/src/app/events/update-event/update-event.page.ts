@@ -15,11 +15,13 @@ import { environment } from 'src/environments/environment';
 })
 export class UpdateEventPage implements OnInit {
   typeValue: string;
-  selectValue: string;
+  sourceValue: string;
   
   fileValid: boolean = false;
   imageURL: string;
   fileToUpload: File = null;
+  beginDate: string;
+  endDate: string;
 
   apiUrl: string;
   httpOptions: any;
@@ -74,6 +76,10 @@ export class UpdateEventPage implements OnInit {
         videoUrl: res['videoUrl']
       });
       this.imageURL = res['posterUrl'];
+      this.sourceValue = res['source'];
+      this.typeValue = res['type'];
+      this.beginDate = res['beginDate']
+      this.endDate = res["endDate"];
     });
   }
 
@@ -82,8 +88,11 @@ export class UpdateEventPage implements OnInit {
       return false;
     } else {
       this.updateEventVideoForm.value.posterUrl = this.imageURL;
-      this.updateEventVideoForm.value.source = this.selectValue;
+      this.updateEventVideoForm.value.source = this.sourceValue;
       this.updateEventVideoForm.value.type = this.typeValue;
+
+      this.updateEventVideoForm.value.beginDate = this.beginDate;
+      this.updateEventVideoForm.value.endDate = this.endDate;
 
       this.eventVideoAPI.updateEventVideo(this.id, this.updateEventVideoForm.value)
         .subscribe((res) => {
@@ -151,7 +160,7 @@ export class UpdateEventPage implements OnInit {
     if (option.value=="") {
       return;
     }
-    this.selectValue = option.target.value;
+    this.sourceValue = option.target.value;
   }
 
   onSelectType(option) {
@@ -159,6 +168,21 @@ export class UpdateEventPage implements OnInit {
       return;
     }
     this.typeValue = option.target.value;
+  }
+
+  onSelectBeginDate(value) {
+    if (value=="") {
+      return;
+    }
+    console.log("BeginDate" + value.target.value);
+    this.beginDate = value.target.value;
+  }
+
+  onSelectEndDate(value) {
+    if (value=="") {
+      return;
+    }
+    this.endDate = value.target.value;
   }
 
   deleteEventVideo() {
