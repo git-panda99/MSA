@@ -15,4 +15,16 @@ export class TicketsService extends TypeOrmCrudService<Ticket> {
         const ticket = await this.ticketRepository.save(data);
         return ticket;
     }
+
+    async update(id: number, data: Ticket){
+        await this.ticketRepository.update({id}, data);
+        const ticket = await this.ticketRepository.find({id});
+        return ticket;
+    }
+
+    async delete(id: number){
+        const ticket = await this.ticketRepository.find({id});
+        await this.ticketRepository.delete({id});
+        return ticket;
+    }
 }

@@ -1,5 +1,5 @@
 import { Body, Controller, HttpException, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Crud, CrudController, CrudRequest} from '@nestjsx/crud';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
@@ -22,6 +22,10 @@ export class TicketsController implements CrudController<Ticket>{
     constructor(public service: TicketsService, public eventService: EventsService, public userService: UsersService) {}
 
     @Roles(Role.User, Role.Organizer, Role.Admin)
+    @ApiOperation({
+        summary: 'Creates/Updates liked ticket',
+        description: 'If no previos liked/bought ticket exists - a new ticket is added. If the ticket was previously created but not bought - the ticket is deleted. Else - like=true for existing ticket.'
+    })
     @Post('like')
     @ApiBody({type: Ticket})
     async createOneLikedTicket(
@@ -30,17 +34,30 @@ export class TicketsController implements CrudController<Ticket>{
     ) {
         let event: Event = await this.eventService.findOne({where: {'id': dto.eventId}});
         let user: User = await this.userService.findOne({where: {id : dto.userId}});
+        if(!event || !user)
+            return new HttpException("Provide valid userId and eventId", HttpStatus.BAD_REQUEST);
+
+        let ticket: Ticket = await this.service.findOne({where: {userId: dto.userId, eventId: dto.eventId}})
+        if(ticket) {
+            if(ticket.liked && ticket.purchaseDate==null)
+                return this.service.delete(ticket.id);
+            ticket.liked = !ticket.liked;
+            return this.service.update(ticket.id, ticket);
+        }
+
         dto.purchaseDate = null;
         dto.valid = false;
-        console.log(event);
-        console.log(user);
-        if(event && user)
-            return this.service.create(dto);
-        throw new HttpException("Provide valid userId and eventId", HttpStatus.BAD_REQUEST);
+        dto.liked = true;
+        
+        return this.service.create(dto);
     }
 
 
     @Roles(Role.User, Role.Organizer, Role.Admin)
+    @ApiOperation({
+        summary: 'Creates purchased ticket',
+        description: 'If no previos liked/bought ticket exists - a new ticket is added. If the ticket was previously created but not bought - the ticket is bought. Else - nothing changes.'
+    })
     @Post('buy')
     @ApiBody({type: Ticket})
     async createOneBuyTicket(
@@ -49,12 +66,23 @@ export class TicketsController implements CrudController<Ticket>{
     ) {
         let event: Event = await this.eventService.findOne({where: {'id': dto.eventId}});
         let user: User = await this.userService.findOne({where: {id : dto.userId}});
+
+        if(event.endDate < new Date())
+            return new HttpException("The event has ended, ticket purchase is disabled.", HttpStatus.BAD_REQUEST);
+
+        let ticket: Ticket = await this.service.findOne({where: {userId: dto.userId, eventId: dto.eventId}})
+        if(ticket) {
+            if(ticket.purchaseDate)
+                return new HttpException("Ticket has already been purchased", HttpStatus.BAD_REQUEST);
+            ticket.purchaseDate = new Date();
+            ticket.valid = true;
+            return this.service.update(ticket.id, ticket);
+        }
+
         dto.purchaseDate = new Date();
         dto.valid = true;
-        console.log(event);
-        console.log(user);
-        if(event && user)
-            return this.service.create(dto);
-        throw new HttpException("Provide valid userId and eventId", HttpStatus.BAD_REQUEST);
+        dto.liked = false;
+        
+        return this.service.create(dto);
     }
 }
