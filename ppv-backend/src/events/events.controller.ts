@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpException, HttpStatus, Param } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { Public } from 'src/auth/public.decorator';
 import { Role } from 'src/auth/role.enum';
@@ -20,6 +20,21 @@ export class EventsController implements CrudController<Event>{
     get base(): CrudController<Event> {
         return this;
     }
+
+    @Roles(Role.Organizer, Role.Admin)
+    @ApiBearerAuth()
+    @ApiOperation({
+        summary: 'Retrieves all events for userId',
+    })
+    @Get('user/:userId')
+    async getUserEvents(@Param('userId') userId: number) {
+        const event = await this.service.find({where: {'userId': userId}})
+        if (event.length!=0) {
+            return event;
+        }
+        throw new HttpException('This user hasn\'t liked or purchased any tickets.', HttpStatus.NOT_FOUND);
+    }
+
 
     @Override('getManyBase')
     @Public()
