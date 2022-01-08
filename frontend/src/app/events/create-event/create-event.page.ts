@@ -18,6 +18,8 @@ export class CreateEventPage implements OnInit {
   selectValue: string;
   typeValue: string;
   httpOptions: any;
+  beginDate: string;
+  endDate: string;
 
   eventForm: FormGroup;
   fileToUpload: File = null;
@@ -46,8 +48,8 @@ export class CreateEventPage implements OnInit {
       posterUrl: "",
       description: [''],
       price: 0,
-      beginDate: "2012-10-25T12:00:00.000Z",
-      endDate: "2012-10-25T12:00:00.000Z",
+      beginDate: new Date().toISOString(),
+      endDate: new Date().toISOString(),
       type: "",
       source: "",
       videoUrl: "",
@@ -56,6 +58,8 @@ export class CreateEventPage implements OnInit {
     this.userId = authService.getProfileId().then( (res) => {
       this.userId = res;
     });
+    this.beginDate =new Date().toISOString();
+    this.endDate =new Date().toISOString();
   }
 
   ngOnInit() { }
@@ -119,15 +123,33 @@ export class CreateEventPage implements OnInit {
     this.typeValue = option.target.value;
   }
 
+  onSelectBeginDate(value) {
+    if (value=="") {
+      return;
+    }
+    console.log("BeginDate" + value.target.value);
+    this.beginDate = value.target.value;
+  }
+
+  onSelectEndDate(value) {
+    if (value=="") {
+      return;
+    }
+    this.endDate = value.target.value;
+  }
+
   onFormSubmit() {
 
     if (!this.eventForm.valid) {
       return false;
     } else {
       this.eventForm.value.posterUrl = this.imageURL;
+      this.imageURL = null;
       this.eventForm.value.source = this.selectValue;
       this.eventForm.value.type = this.typeValue;
       this.eventForm.value.userId = this.userId;
+      this.eventForm.value.beginDate = this.beginDate;
+      this.eventForm.value.endDate = this.endDate;
       this.eventVidoeAPI.addEventVideo(this.eventForm.value)
         .subscribe((res) => {
           this.zone.run(() => {
@@ -140,7 +162,8 @@ export class CreateEventPage implements OnInit {
   }
 
   clearData(f) {
-    this.removeImage(f);
+    if(this.imageURL!=null)
+      this.removeImage(f);
 
     this.router.navigate(['/tabs/my-events']);
   }
