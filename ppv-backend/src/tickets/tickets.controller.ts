@@ -41,7 +41,20 @@ export class TicketsController implements CrudController<Ticket>{
 
 
     @Roles(Role.User, Role.Organizer, Role.Admin)
-    likeTiket() {
-
+    @Post('buy')
+    @ApiBody({type: Ticket})
+    async createOneBuyTicket(
+        @Request() req: CrudRequest,
+        @Body() dto: Ticket,
+    ) {
+        let event: Event = await this.eventService.findOne({where: {'id': dto.eventId}});
+        let user: User = await this.userService.findOne({where: {id : dto.userId}});
+        dto.purchaseDate = new Date();
+        dto.valid = true;
+        console.log(event);
+        console.log(user);
+        if(event && user)
+            return this.service.create(dto);
+        throw new HttpException("Provide valid userId and eventId", HttpStatus.BAD_REQUEST);
     }
 }
