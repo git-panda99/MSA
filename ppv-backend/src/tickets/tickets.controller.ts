@@ -1,8 +1,10 @@
-import { Body, Controller, HttpException, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Crud, CrudController, CrudRequest} from '@nestjsx/crud';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 import { Event } from 'src/events/events.entity';
 import { EventsService } from 'src/events/events.service';
 import { User } from 'src/users/user.entity';
@@ -17,6 +19,7 @@ import { TicketsService } from './tickets.service';
 })
 @ApiTags('tickets')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('tickets')
 export class TicketsController implements CrudController<Ticket>{
     constructor(public service: TicketsService, public eventService: EventsService, public userService: UsersService) {}
@@ -85,4 +88,30 @@ export class TicketsController implements CrudController<Ticket>{
         
         return this.service.create(dto);
     }
+
+    @Roles(Role.User, Role.Organizer, Role.Admin)
+    @ApiOperation({
+        summary: 'Retrieves all tickets for userId',
+    })
+    @Get('user/:userId')
+    async getUserTickets(@Param('userId') userId: number) {
+        const tickets = await this.service.find({where: {'userId': userId}})
+        if (tickets.length!=0) {
+            return tickets;
+        }
+        throw new HttpException('This user hasn\'t liked or purchased any tickets.', HttpStatus.NOT_FOUND);
+    }
+
+    @Roles(Role.User, Role.Organizer, Role.Admin)
+    @ApiOperation({
+        summary: 'Retrieves all tickets for eventId',
+    })
+    @Get('event/:eventId')
+    async getEventTickets(@Param('eventId') eventId: number) {
+        const tickets = await this.service.find({where: {'eventId': eventId}})
+        if (tickets.length!=0) {
+            return tickets;
+        }
+        throw new HttpException('This event hasn\'t been liked or sold any tickets.', HttpStatus.NOT_FOUND);
+    }    
 }
