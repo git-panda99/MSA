@@ -9,4 +9,10 @@ export class TicketsService extends TypeOrmCrudService<Ticket> {
     constructor(@InjectRepository(Ticket) private ticketRepository: Repository<Ticket>) {
         super(ticketRepository)
     }
+
+    async create(data: Ticket){
+        this.ticketRepository.create(data);
+        const ticket = await this.ticketRepository.save(data);
+        return ticket;
+    }
 }

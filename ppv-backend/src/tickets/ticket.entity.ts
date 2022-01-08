@@ -19,6 +19,6 @@ export class Ticket {
     valid: Boolean;
 
     @ApiProperty()
-    @Column()
+    @Column({nullable: true})
     purchaseDate: Date;
 }
