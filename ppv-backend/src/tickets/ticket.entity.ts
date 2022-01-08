@@ -20,5 +20,9 @@ export class Ticket {
 
     @ApiProperty()
     @Column()
+    liked: Boolean;
+
+    @ApiProperty()
+    @Column({nullable: true})
     purchaseDate: Date;
 }

@@ -1,5 +1,5 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Req } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody, ParsedRequest } from '@nestjsx/crud';
 import { Public } from 'src/auth/public.decorator';
 import { Role } from 'src/auth/role.enum';
@@ -20,6 +20,18 @@ export class UsersController implements CrudController<User> {
     get base(): CrudController<User> {
         return this;
     }
+
+    @Public()
+    @ApiOperation({summary: 'Retrieve a single User by email'})
+    @Get(':email')
+    async getByEmail(@Param('email') email: string) {
+        const user = await this.service.findOne({ email });
+        console.log(user);
+        if (user) {
+          return user;
+        }
+        throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND);
+      }
 
     @Override('getManyBase')
     @Public()

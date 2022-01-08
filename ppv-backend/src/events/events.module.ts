@@ -7,6 +7,7 @@ import {Event} from "./events.entity"
 @Module({
   imports: [TypeOrmModule.forFeature([Event])],
   controllers: [EventsController],
-  providers: [EventsService]
+  providers: [EventsService],
+  exports: [EventsService]
 })
 export class EventsModule {}
