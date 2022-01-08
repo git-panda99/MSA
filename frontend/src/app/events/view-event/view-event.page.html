@@ -13,6 +13,11 @@
       <ion-col>
         <div class="ion-text-start">
           <h2>{{eventVideo?.title}}</h2>
+          
+          <button ion-button clear (click)="likeEvent()">
+            <ion-icon name="heart" style="zoom:2.0"></ion-icon>
+          </button>
+          
           <h3>{{eventVideo.type}}</h3>
           <h3>{{eventVideo.price}} lei </h3>
           <p>{{eventVideo.beginDate}} - {{eventVideo.endDate}}</p>
@@ -25,5 +30,6 @@
   </ion-grid>
 
   <ion-button (click)="testVideoPlayerPlugin()" color='primary' expand="block">Play Video</ion-button>
+  <ion-button (click)="buyEvent()" color='primary' expand="block">Buy Ticket</ion-button>
 
 </ion-content>
