@@ -14,7 +14,8 @@
       <img *ngIf="event.posterUrl" [src]="apiUrl+'/files/'+event.posterUrl"/>
       <ion-card-header>
         <ion-card-title>{{event.title}}</ion-card-title>
-        <ion-card-subtitle>{{event.price}} lei</ion-card-subtitle>
+        <ion-card-subtitle class="ion-text-end">{{event.price}} lei</ion-card-subtitle>
+        <p>{{event.beginDate | date: 'MMM YYYY'}} - {{event.endDate | date: 'MMM YYYY'}}</p>
       </ion-card-header>
     </ion-card>
   </ion-col>

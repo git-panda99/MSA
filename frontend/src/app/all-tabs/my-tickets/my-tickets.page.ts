@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth/auth.service';
 import { TicketService } from 'src/app/shared/ticket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mytickets',
@@ -10,12 +11,13 @@ import { TicketService } from 'src/app/shared/ticket.service';
 export class MyTicketsPage {
   userId;
   userTickets: any = [];
+  apiUrl;
 
   constructor(
     private ticketService: TicketService,
     private authService: AuthService
   ) {
-
+    this.apiUrl = environment.api_url;
   }
 
   ngOnInit()
