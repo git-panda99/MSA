@@ -46,10 +46,10 @@ export class TicketService {
   }
 
   getTicketListByUserId(id): Observable<any> {
-    return this.http.get<Ticket[]>(environment.api_url + '/tickets/user/' + id, this.httpOptions)
+    return this.http.get<any[]>(environment.api_url + '/tickets/user/' + id, this.httpOptions)
       .pipe(
         tap(tickets => console.log('Tickets fetched!')),
-        catchError(this.handleError<Ticket[]>('Get Tickets', []))
+        catchError(this.handleError<any[]>('Get Tickets', []))
       );
   }
 

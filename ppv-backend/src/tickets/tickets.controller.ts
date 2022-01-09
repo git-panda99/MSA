@@ -95,9 +95,15 @@ export class TicketsController implements CrudController<Ticket>{
     })
     @Get('user/:userId')
     async getUserTickets(@Param('userId') userId: number) {
-        const tickets = await this.service.find({where: {'userId': userId}})
+        const tickets:Ticket[] = await this.service.find({where: {'userId': userId}})
+        let ticketsWithDetails : Array<{ticket:Ticket, event:Event}>= [];
+        for (let t of tickets) {
+            let e:Event = await this.eventService.findOne({where: {'id': t.eventId}});
+            ticketsWithDetails.push({ticket:t, event:e});
+        }
+
         if (tickets.length!=0) {
-            return tickets;
+            return ticketsWithDetails;
         }
         throw new HttpException('This user hasn\'t liked or purchased any tickets.', HttpStatus.NOT_FOUND);
     }

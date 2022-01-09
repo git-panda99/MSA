@@ -10,17 +10,16 @@
   <ion-grid>
     <ion-row>
     <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let ticket of userTickets" >
-    <ion-card>
+    <ion-card button [routerLink]="['./event/', ticket.event.id]">
       <ion-card-header>
-        <ion-card-title>{{ticket.id}}</ion-card-title>
+        <ion-card-title>{{ticket.event.title}}</ion-card-title>
+        <ion-card-subtitle>{{ticket.event.beginDate}} - {{ticket.event.endDate}}</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
-       user id{{ticket.userId}}....
-       event id{{ticket.eventId}}
         <ion-text color="primary">
-            <h3 *ngIf="ticket.purchaseDate!=null" color="primary">BOUGTH</h3>
-            <h3 *ngIf="ticket.liked==true" color="primary">LIKED</h3>
+            <h3 *ngIf="ticket.ticket.purchaseDate!=null" color="primary">BOUGHT</h3>
+            <h3 *ngIf="ticket.ticket.liked==true" color="primary">LIKED</h3>
           </ion-text>
       </ion-card-content>
     </ion-card>
