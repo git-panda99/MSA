@@ -11,22 +11,16 @@ import { Ticket } from './ticket';
 })
 export class TicketService {
   httpOptions: any;
-  userId: any;
 
   constructor(private http: HttpClient, private authService: AuthService) {
-      this.authService.getCurrentAccessToken().then(
-        (res) => {
-          this.httpOptions = { headers: new HttpHeaders({ 
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${res}`
-          })}
-        }
-      )
-      this.authService.getProfileId().then(
-        (res) => {
-          this.userId = res;
-        }
-      )
+    this.authService.getCurrentAccessToken().then(
+      (res) => {
+        this.httpOptions = { headers: new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${res}`
+        })}
+      }
+    )
    }
 
   addTicketLike(ticket: Ticket): Observable<any> {
@@ -63,7 +57,7 @@ export class TicketService {
     return this.http.get<Ticket[]>(environment.api_url + '/tickets/event/' + id, this.httpOptions)
       .pipe(
         tap(tickets => console.log('Tickets fetched!')),
-        catchError(this.handleError<Ticket[]>(`Get Tickets for user ${this.userId}`, []))
+        catchError(this.handleError<Ticket[]>(`Get Tickets for user ${id}`, []))
       );
   }
 

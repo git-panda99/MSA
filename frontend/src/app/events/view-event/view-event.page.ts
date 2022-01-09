@@ -138,7 +138,7 @@ export class ViewEventPage implements OnInit {
         .subscribe((res) => {
           this.zone.run(() => {
             console.log(res)
-            this.router.navigate(['/tabs/my-events']);
+            this.router.navigate(['/tabs/my-tickets']);
           })
         });
   }
@@ -149,7 +149,7 @@ export class ViewEventPage implements OnInit {
         .subscribe((res) => {
           this.zone.run(() => {
             console.log(res)
-            this.router.navigate(['/tabs/my-events']);
+            this.router.navigate(['/tabs/my-tickets']);
           })
         });
   }

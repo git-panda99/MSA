@@ -14,7 +14,6 @@ import { MyTicketsPageRoutingModule } from './my-tickets-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: MyTicketsPage }]),
     MyTicketsPageRoutingModule,
   ],
   declarations: [MyTicketsPage]

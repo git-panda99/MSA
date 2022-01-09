@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth/auth.service';
-import { EventVideo } from 'src/app/shared/event-video';
-import { Ticket } from 'src/app/shared/ticket';
 import { TicketService } from 'src/app/shared/ticket.service';
 
 @Component({
@@ -28,10 +26,10 @@ export class MyTicketsPage {
   ionViewWillEnter() {
     this.authService.getProfileId().then((res) => {
       this.userId = res;
-      this.ticketService.getTicketListByUserId(this.userId).subscribe((res) => {
+      this.ticketService.getTicketListByUserId(res).subscribe((res2) => {
       console.log("got event list")
-      console.log(res)
-      this.userTickets = res;
+      console.log(res2)
+      this.userTickets = res2;
     })
     });
     

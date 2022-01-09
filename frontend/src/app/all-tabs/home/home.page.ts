@@ -26,16 +26,4 @@ export class HomePage {
       this.EventVideos = res;
     })
   }
-
-  deleteEventVideo(eventVideo, i) {
-    if (window.confirm('Do you want to delete event '+ eventVideo.title +'?')) {
-      this.eventVideoService.deleteEventVideo(eventVideo.id)
-        .subscribe(() => {
-          this.EventVideos.splice(i, 1);
-          console.log('Event deleted!')
-        }
-        )
-    }
-  }
-
 }
