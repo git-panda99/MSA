@@ -67,26 +67,32 @@ export class AuthService {
   }
 
   async getProfileId(){
+    this.getProfileData();
     return this.profile_id;
   }
 
   async getProfileEmail(){
+    this.getProfileData();
     return this.profile_email;
   }
 
   async getProfilePicture(){
+    this.getProfileData();
     return this.profile_picture;
   }
 
   async getProfileRoles(){
+    this.getProfileData();
     return this.profile_roles;
   }
 
   async getProfileFirstName(){
+    this.getProfileData();
     return this.profile_firstName;
   }
 
   async getProfileLastName(){
+    this.getProfileData();
     return this.profile_lastName;
   }
 

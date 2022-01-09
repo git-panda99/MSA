@@ -11,7 +11,7 @@
         <ion-list>
           <ion-item>
             <ion-avatar slot="end">
-              <ion-img [src]="apiUrl+'/files/'+userData.user.imageUrl"></ion-img>
+              <ion-img *ngIf="userData.user.imageUrl!=''" [src]="apiUrl+'/files/'+userData.user.imageUrl"></ion-img>
             </ion-avatar>        
             <ion-title>{{userData.user.firstName}} {{userData.user.lastName}}</ion-title>
           </ion-item>
