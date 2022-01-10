@@ -4,6 +4,7 @@ import { CreateManyDto, Crud, CrudController, CrudRequest, Override, ParsedBody,
 import { Public } from 'src/auth/public.decorator';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
+import { MailService } from 'src/mail/mail.service';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
@@ -15,7 +16,7 @@ import { UsersService } from './users.service';
 @ApiTags('users')
 @Controller('users')
 export class UsersController implements CrudController<User> {
-    constructor(public service: UsersService) {}
+    constructor(public service: UsersService, private mailService: MailService) {}
 
     get base(): CrudController<User> {
         return this;
@@ -50,10 +51,11 @@ export class UsersController implements CrudController<User> {
 
     @Override('createOneBase')
     @Public()
-    createOne(
+    async createOne(
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: User,
     ) {
+        await this.mailService.sendUserConfirmation(dto, '1234');
         return this.base.createOneBase(req, dto);
     }
 
