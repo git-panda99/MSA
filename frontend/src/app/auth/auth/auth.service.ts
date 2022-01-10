@@ -22,7 +22,7 @@ export class AuthService {
   public profile_id: number;
   public profile_email: string;
   public profile_picture: string;
-  public profile_roles: number;
+  public profile_roles: string;
   public profile_firstName: string;
   public profile_lastName: string;
  

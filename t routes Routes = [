@@ -1,0 +1,653 @@
+[33mcommit f13da98322bb134978b38c53dfc191fd26c2176e[m[33m ([m[1;36mHEAD -> [m[1;32mfront[m[33m, [m[1;31morigin/front[m[33m)[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Mon Jan 10 00:44:40 2022 +0200
+
+    Add style
+
+[33mcommit 02fa30bed7b0143f44fba0ca5714ac29cd3c6ee3[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Jan 9 23:05:29 2022 +0200
+
+    Add event detail to my-tickets
+
+[33mcommit 3d19b278830eb7c2ecad59899b898bbc68e46e5c[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Jan 9 22:21:38 2022 +0200
+
+    Added changes to my-tickets | resolved 404 (not found) error
+
+[33mcommit 7e618a45dd036a6c0e8cc2525b8d3aab982bcc89[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Jan 9 19:58:45 2022 +0200
+
+    Add change profile picture
+
+[33mcommit 160ebdbd59e7faeee4b8663982a39e629d7c525a[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Jan 9 00:43:48 2022 +0200
+
+    Move events images
+
+[33mcommit 6d3978797c3b197d35c774f12c9cf61ea7875425[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Jan 9 00:20:07 2022 +0200
+
+    Add user ticket list
+
+[33mcommit d7ce560774a98d03a1012820dc8630010270e31f[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sat Jan 8 23:34:49 2022 +0200
+
+    Buy + like ticket
+
+[33mcommit b03f3c20b9458b7dbf8fd832e4b99aeb0c4e3897[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sat Jan 8 20:08:53 2022 +0200
+
+    Get events by user Id
+
+[33mcommit 94235a44547246acbdce7c88358f809db38d02b3[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: b7bb9e3 bac75e1
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 18:48:08 2022 +0200
+
+    Merge pull request #13 from git-panda99/ticket
+    
+    Get for events and tickets
+
+[33mcommit bac75e1fc2ce71128d388097e6deddbb1216e6d0[m[33m ([m[1;31morigin/ticket[m[33m)[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 18:15:35 2022 +0200
+
+    Add get events by userId
+
+[33mcommit 0dd1e1c0d4e0ee30cf953685bca319ffdc81d06e[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 18:10:50 2022 +0200
+
+    Add get tickets by userId & eventId
+
+[33mcommit b7bb9e320367e31c6a9d284c3b7f89e9ca0b6da3[m
+Merge: 8710e33 77889a3
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 17:36:29 2022 +0200
+
+    Merge pull request #12 from git-panda99/video
+    
+    Video
+
+[33mcommit 8710e3326643f7a03324a639e406f3f1a3ccde11[m
+Merge: eb7baea 9dc451c
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 17:36:07 2022 +0200
+
+    Merge pull request #11 from git-panda99/ticket
+    
+    Ticket
+
+[33mcommit 9dc451c4ca7347837e6355174cf16ca5d850e08a[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 17:34:28 2022 +0200
+
+    Add like/buy ticket logic
+
+[33mcommit 77889a398acbfe557c82faa58ca80d4804b80a7f[m[33m ([m[1;31morigin/video[m[33m, [m[1;32mvideo[m[33m)[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sat Jan 8 17:32:05 2022 +0200
+
+    Fix update time
+
+[33mcommit 4553978e63eaae89c45019e5aae320d9badbfe96[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sat Jan 8 17:18:22 2022 +0200
+
+    Fixed date picker + video design
+
+[33mcommit 35b28841c61c9a230bf02ecdcf24d31ef9ef883e[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 16:45:15 2022 +0200
+
+    Add Ticket Buy
+
+[33mcommit cdc366912575f42e463b9a7963a5f99094b75208[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Jan 8 16:24:07 2022 +0200
+
+    Add Ticket Like
+
+[33mcommit 90d97aefbacdb0ae25070155f8a45a20b0237899[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Fri Jan 7 23:18:02 2022 +0200
+
+    Working mp4
+
+[33mcommit eb7baea2ac38a306c3b5e121646ae2ba149f8920[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Fri Jan 7 22:05:46 2022 +0200
+
+    Fix auth guard canLoad to canActivate
+
+[33mcommit 962f53683185a382662ac49e61280b81edb7c392[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Fri Jan 7 22:04:58 2022 +0200
+
+    Add Get user by email
+
+[33mcommit f05a3aaea74373dcfcc09fb1fa81c9d5248b7919[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Fri Jan 7 21:32:54 2022 +0200
+
+    Updated ionic + add token to http headers
+
+[33mcommit 7bf758aadc63bcbf05d24a2c2a2e294e60eb2106[m
+Merge: f432ed8 a3fb9b3
+Author: paula-christine <62300421+paula-christine@users.noreply.github.com>
+Date:   Fri Jan 7 10:39:04 2022 +0200
+
+    Merge pull request #10 from git-panda99/events
+    
+    Events
+
+[33mcommit a3fb9b3e2d25bb46a9de9ae45103a1118ce94a85[m[33m ([m[1;31morigin/events[m[33m)[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 23:00:26 2022 +0200
+
+    Add mp4 to options
+
+[33mcommit cc0d11d017789b105fb6bc8d31df0390b3a89fdb[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 22:58:15 2022 +0200
+
+    Add event view page
+
+[33mcommit 1873a730fffeafec6cd2e0ce8071659c25508878[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 15:51:49 2022 +0200
+
+    Add delete button to update event
+
+[33mcommit 39bbc02a8889f0ee9cc1b3cd2eaf7912b97b4470[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 15:41:39 2022 +0200
+
+    Add special fields to update event
+
+[33mcommit 4c4f5a3b5e900b17771c5f25bf392ca03c0519d6[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 15:34:25 2022 +0200
+
+    Add image update to event
+
+[33mcommit 3286c75b560641977eb265de790bd4e517fc7df0[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 14:59:42 2022 +0200
+
+    Cancel button create event
+
+[33mcommit c9237e5853bb544f616ac1d018deb5272e0b61ce[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 14:21:08 2022 +0200
+
+    Edit profile picture and settings menu
+
+[33mcommit b869e406697a447521ff35b2aba9eafb8c907690[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 13:56:01 2022 +0200
+
+    Clear storage at log-out
+
+[33mcommit bd339271b39c285332269e39967496ab41a5fa0b[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 13:00:15 2022 +0200
+
+    Add user data to storage and to event
+
+[33mcommit f432ed8fa47b2a0e48bf1c341f1521d2146a0c1f[m
+Merge: 3c17cbd 928be7e
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Thu Jan 6 12:00:16 2022 +0200
+
+    Merge pull request #9 from git-panda99/add-roles
+    
+    Role Based Guards
+
+[33mcommit 928be7ef5575dc15510c428ff6c56813a1b44112[m[33m ([m[1;31morigin/add-roles[m[33m)[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Thu Jan 6 11:58:31 2022 +0200
+
+    Add firstName, lastName and description
+
+[33mcommit f4b95d98f20c828b6da56fa9a61714b102237f4d[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Jan 6 11:54:32 2022 +0200
+
+    Add profile page
+
+[33mcommit 6338bd22a7f28c6dda0726b2b13fbc1574332614[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 22:09:34 2022 +0200
+
+    Add role based authorization guard
+
+[33mcommit 17cb41142252b4f1a9bf8145e10c98af228e450b[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Wed Jan 5 16:23:40 2022 +0200
+
+    Add user data
+
+[33mcommit 9b09825fe51edbb9df2927b302190628f64885cf[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 15:53:54 2022 +0200
+
+    Change guards to file endpoints
+
+[33mcommit edf3d8a8dd88c96115a20b96aa8df88daca60540[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 15:42:41 2022 +0200
+
+    Add roles to event endpoints
+
+[33mcommit e1b56b6c258d63e8826eef4a375bb70440657c93[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 15:12:13 2022 +0200
+
+    Make login public
+
+[33mcommit 975967afd2286213e22fa6d3b7dba27e76a62bc4[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Wed Jan 5 15:00:41 2022 +0200
+
+    Add Ionic Storage
+
+[33mcommit 8ac129d3461cf62f71d9a26dc863b5a74a2ab0d7[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 14:40:48 2022 +0200
+
+    Add roles to user endpoints
+
+[33mcommit 6c17c579866063afd273026ac090b0c712ff8974[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Jan 5 13:50:28 2022 +0200
+
+    Add public/role decorators + Role enum
+
+[33mcommit 2541ee11e3d9f528793eda738e07db4b47df4772[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 23:27:23 2022 +0200
+
+    Finaly conquered SELECT
+
+[33mcommit dae4c36e4c229c027f0d03daefb690e80257ddb6[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 21:38:39 2022 +0200
+
+    Add global jwt quard + Make endpoints public
+
+[33mcommit ec6d0117a44c6ec5b635c2f116d61bdcd5f789a8[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 18:53:20 2022 +0200
+
+    Add file filter
+
+[33mcommit 691555461c583452758bbc7cdf9fac848ab66bca[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 18:09:42 2022 +0200
+
+    Remove change image
+
+[33mcommit eb992e169d199249f15b465fda3640ac7529475a[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 17:38:22 2022 +0200
+
+    Add summary to openapi
+
+[33mcommit 7274da654c28292d8eaf07ccf963f306502a1a8b[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 17:25:07 2022 +0200
+
+    Add bcrypt.compare to login
+
+[33mcommit f85bbc9adecee88ed650560e5ce4f33431f0b019[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 13:01:10 2022 +0200
+
+    Change routing update
+
+[33mcommit 3c17cbd80a888f963f2e800cea3243eb2435017d[m
+Merge: 5ba2e0b 09627b4
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 11:58:22 2022 +0200
+
+    Merge branch 'main' of https://github.com/git-panda99/msa
+
+[33mcommit 5ba2e0bdee7f137d1c8dac27f9fb6dafcfe6405b[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Jan 4 11:57:21 2022 +0200
+
+    Change links relative
+
+[33mcommit 09627b49e29307df4a9e160df761034a3c3a14b7[m
+Merge: 2ae97ae 9d0a1ca
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 11:35:14 2022 +0200
+
+    Merge pull request #8 from git-panda99/auth
+    
+    Add hash to user add and update
+
+[33mcommit 9d0a1cac0c6ca1d401de03a8261effb727c14bb1[m
+Merge: adb9897 2ae97ae
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 11:35:00 2022 +0200
+
+    Merge branch 'main' into auth
+
+[33mcommit 2ae97aea43502ee05bff207a139a3632b9f47816[m
+Merge: 781ec91 89ba29e
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Jan 4 11:29:44 2022 +0200
+
+    Merge pull request #7 from git-panda99/file-delete
+    
+    Add file delete
+
+[33mcommit 781ec91279a420d3d93415ec4500de7fbd66a219[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Dec 21 11:41:40 2021 +0200
+
+    Add assets to pages
+
+[33mcommit 89ba29e836b24505b1add78bca3c5cf53c09d557[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Dec 21 01:12:08 2021 +0200
+
+    Add file delete
+
+[33mcommit fbc34742d60587fb48de1c0597c4368037bfa2f8[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Dec 14 13:52:32 2021 +0200
+
+    Add image to event
+
+[33mcommit 69d05a502c1fb9433ef63867acca1df4ed7a957b[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Dec 14 13:34:33 2021 +0200
+
+    Display image
+
+[33mcommit adb9897920c0226cf0ed85c4f0d6b541d89c0af2[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Dec 14 12:00:35 2021 +0200
+
+    Add hash to user add and update
+
+[33mcommit bd037ab5641b0225a3269585c94115cd75fbbe5a[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Dec 7 14:03:31 2021 +0200
+
+    File upload frontend
+
+[33mcommit 665f7586139d5b0c5c6fa63afc9c109c53359aad[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Dec 7 11:16:37 2021 +0200
+
+    Chang style
+
+[33mcommit 9c469c1818fe2aeb3663b7c8a7a96df53cbd00e1[m
+Merge: bbbed73 e6a6997
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Dec 7 10:49:34 2021 +0200
+
+    Merge pull request #6 from git-panda99/file-upload
+    
+    Add file upload
+
+[33mcommit e6a69971148f40c2a69168ca3bbf83c3e289b854[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Dec 7 10:48:32 2021 +0200
+
+    Add file upload
+
+[33mcommit bbbed739b60ec1230136b058c34ae17052a01a44[m
+Merge: f10f926 270d7cb
+Author: paula-christine <62300421+paula-christine@users.noreply.github.com>
+Date:   Mon Dec 6 16:16:17 2021 +0200
+
+    Merge pull request #5 from git-panda99/auth
+    
+    Merge
+
+[33mcommit 270d7cb194192535bf0c94025e7fc4f4ddcfe57c[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Dec 6 16:13:41 2021 +0200
+
+    Fix validation
+
+[33mcommit f10f9266a6a4499a1fd727ff948ea89f48407024[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Mon Nov 22 12:57:14 2021 +0200
+
+    Add guard
+
+[33mcommit d16d2b18c7724eea1db32534c2f6605e3136539f[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Sun Nov 21 22:24:38 2021 +0200
+
+    Frontend login + register
+
+[33mcommit 041864ebb81d56a8fca600d7dbd696692ac68fee[m
+Merge: 8696652 211fda1
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Nov 20 20:55:07 2021 +0200
+
+    Merge pull request #4 from git-panda99/auth
+    
+    Auth
+
+[33mcommit 211fda1295560219d6dad226e750adb81f06af51[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Nov 20 20:54:02 2021 +0200
+
+    Add jwt auth
+
+[33mcommit b88b2cc212ed9ed95c0f1f336b4f2e109f89e823[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Nov 20 20:00:23 2021 +0200
+
+    Add local auth guard
+
+[33mcommit 7675d71e215b9614278037f47660200428c08f0f[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Sat Nov 20 19:55:58 2021 +0200
+
+    Add local auth
+
+[33mcommit 869665285faee832bbbe010b561ed9519106f038[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 16 15:49:52 2021 +0200
+
+    Design Changes
+
+[33mcommit d98daee0515550c2f2257197944600db8d1aa246[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 16 13:26:13 2021 +0200
+
+    Add auth
+
+[33mcommit b2235e043bc80d8bf39e68002a80a79c33b676c9[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Mon Nov 15 20:55:17 2021 +0200
+
+    Add update event
+
+[33mcommit 1d1d6c24fd2c5cc5465494d75681b09a501aa3f2[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Nov 10 11:58:02 2021 +0200
+
+    Add categories crud
+
+[33mcommit 7e065e0c644b828bdbafff77520cbcf18d361177[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Nov 10 11:51:11 2021 +0200
+
+    Add tickets crud
+
+[33mcommit e748edfb6ce86dd797250cee5092bc6c180275a0[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Nov 10 11:36:15 2021 +0200
+
+    Add Swagger to events
+
+[33mcommit b71e4dc7c56f2f48ce4eb60d12b5731fcd2cac1b[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Wed Nov 10 11:27:07 2021 +0200
+
+    Add User Crud
+
+[33mcommit f5362b7096fe79f742c62a0508e8f20abe5c033d[m
+Merge: 503bb5f 407dbb3
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 9 13:10:12 2021 +0200
+
+    Merge pull request #3 from git-panda99/backend
+    
+    Backend
+
+[33mcommit 407dbb317f7b2fc473aa612ffd2b1882bc5404c8[m
+Merge: 885b633 503bb5f
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 9 13:09:59 2021 +0200
+
+    Merge branch 'main' into backend
+
+[33mcommit 503bb5f6f54b345a0e5b3e368da0f3fa57e4782f[m
+Merge: 99bdbef df7f559
+Author: paula-christine <62300421+paula-christine@users.noreply.github.com>
+Date:   Tue Nov 9 13:03:43 2021 +0200
+
+    Merge pull request #2 from git-panda99/routing
+    
+    CRUD Frontend
+
+[33mcommit df7f5595d06cd485f5834d381a26adfe461b36aa[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 9 12:23:32 2021 +0200
+
+    Change my-events design
+
+[33mcommit 748d95b55659f8dc82b679cd1aba8036873d301a[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 9 11:53:09 2021 +0200
+
+    Add Event add and list with backend
+
+[33mcommit 885b633aaaa07f74ba7ba07ecfae080e32dd1a8c[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 9 10:53:45 2021 +0200
+
+    Fix videoUrl
+
+[33mcommit 5d8cd4a37285c27ca2d7127e11390f285ece3cdb[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Thu Nov 4 15:16:40 2021 +0200
+
+    Partial Event CRUD
+
+[33mcommit 5b36979493c832beda44795eec050d679f120dbd[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 2 16:55:11 2021 +0200
+
+    Refactor
+
+[33mcommit 3ae031cd676911fb713ce40d68979ac07c05fdcb[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 2 16:40:45 2021 +0200
+
+    Move Event component
+
+[33mcommit 6d8d5c2b7386e23a4e30488d2050040cc43ac782[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 2 15:28:47 2021 +0200
+
+    Refactor Tabs
+
+[33mcommit 9ff56400c58bbe0d7cd989269e2bb0754b86c6c3[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Nov 2 15:16:31 2021 +0200
+
+    Add Tabs
+
+[33mcommit bfc999be9a76dae28e3cb3b133b172b4a11c306f[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 2 15:07:19 2021 +0200
+
+    Add users
+
+[33mcommit 4a0885e0bb4a93635b9155c898ddcd0ca9ad9236[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 2 14:40:05 2021 +0200
+
+    Change app path
+
+[33mcommit cafd59cce8c54ff26efc7573fbba7ecbba3b3b2e[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Tue Nov 2 14:32:29 2021 +0200
+
+    Add app again
+
+[33mcommit 99bdbef4301964eb62671714a61bef1f9a9de170[m
+Merge: 8f5ab38 1f07587
+Author: paula-christine <62300421+paula-christine@users.noreply.github.com>
+Date:   Tue Oct 26 00:08:08 2021 +0300
+
+    Merge pull request #1 from git-panda99/front-event
+    
+    Add event form
+
+[33mcommit 1f0758706b394e3fc5f8f3460752c9f6cb481606[m
+Author: paula-christine <paula.ciorba@gmail.com>
+Date:   Tue Oct 26 00:04:58 2021 +0300
+
+    Add event form
+
+[33mcommit 8f5ab38310f6f912e04d90420a70850ccb45422f[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 22:53:54 2021 +0300
+
+    Add Get, Post events
+
+[33mcommit 5c5fe5e26fd5d7017314e38538adec198bed1d51[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 22:48:06 2021 +0300
+
+    Add Get, Post events
+
+[33mcommit a348b2a2acfdc0d9c7f5666466eb9c9c76496477[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 22:27:31 2021 +0300
+
+    Add event entity
+
+[33mcommit 7abc5d47a3357252ca50c923c3664d4202cf611c[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 22:02:22 2021 +0300
+
+    Add database
+
+[33mcommit 7daf887f55a305f0a114275bbd02ab53ce8c47f2[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 20:35:59 2021 +0300
+
+    Create ionic frontend
+
+[33mcommit e4dc210b5a5f107003aa09280d3edfbc3cba8fd4[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 20:24:14 2021 +0300
+
+    Create nest.js backend
+
+[33mcommit 2acd043bcfbc905f79c9a51182d602d175116f5e[m
+Author: alexandra-doris <62300754+alexandra-doris@users.noreply.github.com>
+Date:   Mon Oct 25 20:18:09 2021 +0300
+
+    Initial commit

@@ -15,8 +15,6 @@ const routes: Routes = [
       {
         path: 'search',
         loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule),
-        canActivate: [AuthGuard],
-        runGuardsAndResolvers: 'always'
       },
       {
         path: 'my-tickets',
@@ -40,8 +38,16 @@ const routes: Routes = [
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'
+      },
+      {
+        path: 'event/:id',
+        loadChildren: () => import('../events/view-event/view-event.module').then( m => m.ViewEventPageModule)
       }
     ]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('../auth/login/login.module').then(m => m.LoginPageModule),
   },
   {
     path: '',

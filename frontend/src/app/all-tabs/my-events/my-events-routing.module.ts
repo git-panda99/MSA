@@ -10,7 +10,6 @@ const routes: Routes = [
   {path: '', component: MyEventsPage},
   {path: 'create-event', component: CreateEventPage},
   {path: 'update-event/:id', component: UpdateEventPage},
-  {path: 'event/:id', component: ViewEventPage},
 
 ];
 
