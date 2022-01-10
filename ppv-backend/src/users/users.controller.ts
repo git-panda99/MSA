@@ -55,8 +55,14 @@ export class UsersController implements CrudController<User> {
         @ParsedRequest() req: CrudRequest,
         @ParsedBody() dto: User,
     ) {
-        await this.mailService.sendUserConfirmation(dto, '1234');
-        return this.base.createOneBase(req, dto);
+        return this.base.createOneBase(req, dto).then(
+            async (user) => {
+                if(user) {
+                    await this.mailService.sendUserConfirmation(user, user.confirmationCode);
+                }
+                return user;
+            }
+        );
     }
 
     @Override('createManyBase')
