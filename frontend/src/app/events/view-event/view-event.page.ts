@@ -100,7 +100,7 @@ export class ViewEventPage implements OnInit {
     } else if (vType === 'mpd') {
     } else if (vType === 'smooth') {
     } else if (vType === 'aws') {
-    } else if (vType === 'youtube') {
+    //} else if (vType === 'youtube') {
     } else if (vType === 'application') {
     } else if (vType === 'internal') {
     } else if (vType === 'asset' && this.iPlatform) {
