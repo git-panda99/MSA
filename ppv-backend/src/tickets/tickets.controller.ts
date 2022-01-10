@@ -121,6 +121,12 @@ export class TicketsController implements CrudController<Ticket>{
     @Get('event/:eventId')
     async getEventTickets(@Param('eventId') eventId: number) {
         const tickets = await this.service.find({where: {'eventId': eventId}})
+        let ticketsWithDetails : Array<{ticket:Ticket, user:User}>= [];
+        for (let t of tickets) {
+            let u:User = await this.userService.findOne({where: {'id': t.userId}});
+            if(t.purchaseDate)
+                ticketsWithDetails.push({ticket:t, user:u});
+        }
         if (tickets.length!=0) {
             return tickets;
         }
