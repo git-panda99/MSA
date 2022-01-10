@@ -53,4 +53,12 @@ export class Event {
     @ApiProperty()
     @Column()
     ended: boolean;
+
+    @ApiProperty()
+    @Column({default: 0})
+    noSoldTickets: number;
+
+    @ApiProperty()
+    @Column({default: 0})
+    noHearts: number;
 }

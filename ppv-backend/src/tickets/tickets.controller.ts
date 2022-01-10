@@ -42,16 +42,20 @@ export class TicketsController implements CrudController<Ticket>{
 
         let ticket: Ticket = await this.service.findOne({where: {userId: dto.userId, eventId: dto.eventId}})
         if(ticket) {
-            if(ticket.liked && ticket.purchaseDate==null)
+            if(ticket.liked && ticket.purchaseDate==null) {
+                this.eventService.likeTicket(event.id, -1);
                 return this.service.delete(ticket.id);
+            }
             ticket.liked = !ticket.liked;
+            if(ticket.liked)
+            this.eventService.likeTicket(event.id, 1);
             return this.service.update(ticket.id, ticket);
         }
 
         dto.purchaseDate = null;
         dto.valid = false;
         dto.liked = true;
-        
+        this.eventService.likeTicket(event.id, 1);
         return this.service.create(dto);
     }
 
@@ -79,13 +83,15 @@ export class TicketsController implements CrudController<Ticket>{
                 return new HttpException("Ticket has already been purchased", HttpStatus.BAD_REQUEST);
             ticket.purchaseDate = new Date();
             ticket.valid = true;
+            this.eventService.buyTicket(event.id, 1);
             return this.service.update(ticket.id, ticket);
         }
 
         dto.purchaseDate = new Date();
         dto.valid = true;
         dto.liked = false;
-        
+        this.eventService.buyTicket(event.id, 1);
+
         return this.service.create(dto);
     }
 
