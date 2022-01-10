@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
+import { JwtStrategy } from './jwt.strategy';
+import { User } from 'src/users/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -23,9 +25,13 @@ export class AuthService {
       }
 
     async login(user: any) {
-        const payload = { user: user };
-        return {
-          access_token: this.jwtService.sign(payload),
-        };
+        if(user.status === 'Active') {
+          const payload = { user: user };
+          return {
+            access_token: this.jwtService.sign(payload),
+          };
+        }
+        throw new HttpException('Pending Account. Please Verify Your Email!', HttpStatus.UNAUTHORIZED);
+        
       }
 }

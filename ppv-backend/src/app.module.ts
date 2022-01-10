@@ -10,9 +10,14 @@ import { FilesModule } from './files/files.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { RolesGuard } from './auth/roles.guard';
+import { MailModule } from './mail/mail.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // no need to import into other modules
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -29,6 +34,7 @@ import { RolesGuard } from './auth/roles.guard';
     CategoriesModule,
     AuthModule,
     FilesModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [
