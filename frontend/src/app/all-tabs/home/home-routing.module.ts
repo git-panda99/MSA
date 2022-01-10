@@ -5,7 +5,6 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {path: '', component: HomePage},
-  {path: 'event/:id', component: ViewEventPage},
 ];
 
 @NgModule({
