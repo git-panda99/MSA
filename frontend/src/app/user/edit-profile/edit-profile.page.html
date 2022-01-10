@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>edit-profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding ios list-ios list-lines-full list-ios-lines-full hydrated">
+    <form [formGroup]="updateUserForm" (ngSubmit)="updateForm()">
+      <ion-item>
+        <ion-label>First Name</ion-label>
+        <ion-input placeholder="First Name" value="{{updateUserForm.value.firstName}}" formControlName="firstName" type="text" required ngDefaultControl></ion-input>
+      </ion-item>
+
+      <br>
+      <ion-item>
+        <ion-label>Last Name</ion-label>
+        <ion-input value="{{updateUserForm.value.lastName}}" formControlName="lastName" type="text" required ngDefaultControl></ion-input>
+      </ion-item>
+            
+      <br>
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-textarea  placeholder="Enter Event Description..." value="{{updateUserForm.value.description}}" formControlName="description" ngDefaultControl></ion-textarea>
+      </ion-item>
+
+      <br>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input placeholder="Email" value="{{updateUserForm.value.email}}" formControlName="email" type="text" required ngDefaultControl></ion-input>
+      </ion-item>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Update Profile</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="deleteProfile()" color="secondary" shape="full" expand="block">Delete Profile</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+</ion-content>
