@@ -3,5 +3,6 @@ export class Ticket {
     userId: number;
     eventId: number;
     valid: Boolean;
+    liked: Boolean;
     purchaseDate: Date;
 }

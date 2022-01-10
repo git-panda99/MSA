@@ -11,19 +11,29 @@
         <img *ngIf="eventVideo.posterUrl" [src]="apiUrl+'/files/'+eventVideo.posterUrl"/>
       </ion-col>
       <ion-col>
-        <div class="ion-text-start">
+        <div>
           <h2>{{eventVideo?.title}}</h2>
-          <h3>{{eventVideo.type}}</h3>
-          <h3>{{eventVideo.price}} lei </h3>
-          <p>{{eventVideo.beginDate}} - {{eventVideo.endDate}}</p>
+          
+          <button ion-button clear (click)="likeEvent()" style="background: none !important;">
+            <ion-icon name="heart" style="zoom:2.0" color="primary"></ion-icon>
+          </button>
+          
+          <ion-text  color="primary">
+            <p *ngIf="eventVideo.type=='premiere'">PRIMARY</p>
+            <p *ngIf="eventVideo.type=='live'">LIVE</p>
+            <p *ngIf="eventVideo.type=='recording'">RECORDING</p>
+          </ion-text>
+          <ion-card-subtitle class="ion-text-end">{{eventVideo.price}} lei</ion-card-subtitle>
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
+      <p>{{eventVideo.beginDate | date: 'MMM dd, YYYY'}} - {{eventVideo.endDate | date: 'MMM dd, YYYY'}}</p>
       <p>{{eventVideo.description}}</p>
     </ion-row>
   </ion-grid>
 
   <ion-button (click)="testVideoPlayerPlugin()" color='primary' expand="block">Play Video</ion-button>
+  <ion-button (click)="buyEvent()" color='primary' expand="block">Buy Ticket</ion-button>
 
 </ion-content>

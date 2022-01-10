@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { ModalController } from '@ionic/angular';
 import { EventVideo } from 'src/app/shared/event-video';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 import { FullscreenPage } from '../fullscreen/fullscreen.page';
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
+import { AuthService } from 'src/app/auth/auth/auth.service';
+import { TicketService } from 'src/app/shared/ticket.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-view-event',
@@ -24,6 +29,7 @@ export class ViewEventPage implements OnInit {
   private testApi = false;
 
   apiUrl: string;
+  ticketForm = null;
 
   eventVideo: any;
   id: any;
@@ -31,7 +37,12 @@ export class ViewEventPage implements OnInit {
   constructor(
     private eventVideoAPI: EventVideoService,
     private actRoute: ActivatedRoute,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private authService: AuthService,
+    private ticketService: TicketService,
+    public fb: FormBuilder,
+    private zone: NgZone,
+    private router: Router,
   ) {
     this.apiUrl = environment.api_url;
     this.id = this.actRoute.snapshot.paramMap.get('id');
@@ -41,14 +52,6 @@ export class ViewEventPage implements OnInit {
     this.eventVideoAPI.getEventVideo(this.id).subscribe(res => {
       this.eventVideo = res;
       console.log(res)
-      /*this.eventVideo["posterUrl"] = res['posterUrl'];
-      this.eventVideo["description"] = res['description'];
-      this.eventVideo["price"] = res['price'];
-      this.eventVideo["beginDate"] = res['beginDate'];
-      this.eventVideo["endDate"] = res['endDate'];
-      this.eventVideo["type"] = res['type'];
-      this.eventVideo["source"] = res['source'];
-      this.eventVideo["videoUrl"] = res['videoUrl'];*/
     });
     this.platform = Capacitor.getPlatform();
     console.log(`$$$ platform: ${this.platform}`);
@@ -69,6 +72,15 @@ export class ViewEventPage implements OnInit {
     console.log(`$$$ iPlatform: ${this.iPlatform}`);
     console.log(`$$$ aPlatform: ${this.aPlatform}`);
     console.log(`$$$ wPlatform: ${this.wPlatform}`);
+
+    this.ticketForm = this.fb.group({
+      userId: 0,
+      eventId: this.id,
+      valid: false,
+      liked: false,
+      purchaseDate: "2022-01-08T20:32:22.409Z"
+    });
+    this.authService.getProfileId().then((res) => {this.ticketForm.value.userId = res})
   }
 
   async testVideoPlayerPlugin() {
@@ -118,6 +130,28 @@ export class ViewEventPage implements OnInit {
       swipeToClose: true
     });
     await modal.present();
+  }
+
+  likeEvent(){
+    console.log("Ticket" +this.ticketForm.value);
+    this.ticketService.addTicketLike(this.ticketForm.value)
+        .subscribe((res) => {
+          this.zone.run(() => {
+            console.log(res)
+            this.router.navigate(['/tabs/my-tickets']);
+          })
+        });
+  }
+
+  buyEvent(){
+    console.log("Ticket" +this.ticketForm.value);
+    this.ticketService.addTicketBuy(this.ticketForm.value)
+        .subscribe((res) => {
+          this.zone.run(() => {
+            console.log(res)
+            this.router.navigate(['/tabs/my-tickets']);
+          })
+        });
   }
 
 

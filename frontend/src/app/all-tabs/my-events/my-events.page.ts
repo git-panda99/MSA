@@ -20,7 +20,7 @@ export class MyEventsPage {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.eventVideoService.getEventVideoList().subscribe((res) => {
+    this.eventVideoService.getEventVideoListById().subscribe((res) => {
       console.log("got event list")
       console.log(res)
       this.EventVideos = res;

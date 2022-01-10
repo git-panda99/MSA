@@ -12,27 +12,23 @@
       <ion-row>
       <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
       <ion-card>
+        <img *ngIf="event.posterUrl" [src]="apiUrl+'/files/'+event.posterUrl"/>
         <ion-card-header>
-          <img *ngIf="event.posterUrl" [src]="apiUrl+'/files/'+event.posterUrl"/>
           <ion-card-title>{{event.title}}</ion-card-title>
-          <div class="item-note" item-end>
-            <button ion-button clear [routerLink]="['./update-event/', event.id]">
-              
-              <ion-icon name="create" style="zoom:2.0"></ion-icon>
-            </button>
-            <button ion-button clear (click)="deleteEventVideo(event, event.id)">
-              <ion-icon name="trash" style="zoom:2.0"></ion-icon>
-            </button>
-            <button ion-button clear [routerLink]="['./event/', event.id]">
-              <ion-icon name="eye" style="zoom:2.0"></ion-icon>
-            </button>
-          </div>
+          <ion-card-subtitle class="ion-text-end">{{event.price}} lei</ion-card-subtitle>
         </ion-card-header>
-      
-        <ion-card-content>
-         this is the id{{event.id}}....
-          {{event.description}}
-        </ion-card-content>
+
+        <div class="ion-text-center">
+          <button ion-button [routerLink]="['./update-event/', event.id]" style="background: none !important;">
+            <ion-icon slot="icon-only" name="create" style="zoom:2.0;"></ion-icon>
+          </button>
+          <button ion-button (click)="deleteEventVideo(event, event.id)" style="background: none !important;">
+            <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+          </button>
+          <button ion-button [routerLink]="['./event/', event.id]" style="background: none !important;">
+            <ion-icon name="eye" style="zoom:2.0"></ion-icon>
+          </button>
+        </div>
       </ion-card>
     </ion-col>
     </ion-row>

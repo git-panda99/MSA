@@ -3,17 +3,25 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth/auth.service';
 import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  httpOptions: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.authService.getCurrentAccessToken().then(
+      (res) => {
+        this.httpOptions = { headers: new HttpHeaders({ 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${res}`
+        })}
+      }
+    )
+   }
 
   addUser(user: User): Observable<any> {
     return this.http.post<User>(environment.api_url+'/users', user, this.httpOptions)
@@ -38,15 +46,16 @@ export class UserService {
       );
   }
 
-  updateUser(id, event: User): Observable<any> {
-    return this.http.put(environment.api_url + '/users/' + id, event, this.httpOptions)
+  updateUser(id, user: any): Observable<any> {
+    console.log(this.httpOptions)
+    return this.http.patch(environment.api_url + '/users/' + id, user, this.httpOptions)
       .pipe(
         tap(_ => console.log(`User updated: ${id}`)),
         catchError(this.handleError<User[]>('Update User'))
       );
   }
   
-  deleteUser(id): Observable<User[]> {
+  deleteUser(id): Observable<any> {
     return this.http.delete<User[]>(environment.api_url + '/user/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`User deleted: ${id}`)),

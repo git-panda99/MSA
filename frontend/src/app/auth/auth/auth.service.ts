@@ -45,48 +45,56 @@ export class AuthService {
  
   // Get our secret protected data
   getProfileData() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.currentAccessToken}`
-      })
-    }
-    this.user = this.http.get(`${this.url}/profile`, httpOptions).pipe(
-      tap(_ => console.log(`Profile fetched`)),
-      catchError(this.handleError<User>(`Get Profile`))
-    );
+    if(this.currentAccessToken!=null){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.currentAccessToken}`
+        })
+      }
+      this.user = this.http.get(`${this.url}/profile`, httpOptions).pipe(
+        tap(_ => console.log(`Profile fetched`)),
+        catchError(this.handleError<User>(`Get Profile`))
+      );
 
-    this.user.subscribe((res) => {
-      this.profile_id = res.user.id;
-      this.profile_email = res.user.email;
-      this.profile_picture = res.user.picture;
-      this.profile_roles = res.user.roles;
-      this.profile_firstName = res.user.firstName;
-      this.profile_lastName = res.user.lastName;
-    });
+      this.user.subscribe((res) => {
+        this.profile_id = res.user.id;
+        this.profile_email = res.user.email;
+        this.profile_picture = res.user.picture;
+        this.profile_roles = res.user.roles;
+        this.profile_firstName = res.user.firstName;
+        this.profile_lastName = res.user.lastName;
+      });
+    }
   }
 
   async getProfileId(){
+    this.getProfileData();
     return this.profile_id;
   }
 
   async getProfileEmail(){
+    this.getProfileData();
     return this.profile_email;
   }
 
   async getProfilePicture(){
+    this.getProfileData();
     return this.profile_picture;
   }
 
   async getProfileRoles(){
+    this.getProfileData();
     return this.profile_roles;
   }
 
   async getProfileFirstName(){
+    this.getProfileData();
     return this.profile_firstName;
   }
 
   async getProfileLastName(){
+    this.getProfileData();
     return this.profile_lastName;
   }
 

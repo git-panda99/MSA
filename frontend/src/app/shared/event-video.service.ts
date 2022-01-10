@@ -11,6 +11,7 @@ import { AuthService } from '../auth/auth/auth.service';
 })
 export class EventVideoService {
   httpOptions: any;
+  userId: any;
 
   constructor(private http: HttpClient, private authService: AuthService) {
       this.authService.getCurrentAccessToken().then(
@@ -19,6 +20,11 @@ export class EventVideoService {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${res}`
           })}
+        }
+      )
+      this.authService.getProfileId().then(
+        (res) => {
+          this.userId = res;
         }
       )
    }
@@ -43,6 +49,14 @@ export class EventVideoService {
       .pipe(
         tap(events => console.log('Events fetched!')),
         catchError(this.handleError<EventVideo[]>('Get Events', []))
+      );
+  }
+
+  getEventVideoListById(): Observable<any> {
+    return this.http.get<EventVideo[]>(environment.api_url + '/events/user/' + this.userId, this.httpOptions)
+      .pipe(
+        tap(events => console.log('Events fetched!')),
+        catchError(this.handleError<EventVideo[]>(`Get Events for user ${this.userId}`, []))
       );
   }
 
