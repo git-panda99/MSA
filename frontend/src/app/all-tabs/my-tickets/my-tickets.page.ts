@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MyTicketsPage {
   userId;
-  userTickets: any = null;
+  userTickets: any = [];
   apiUrl;
 
   constructor(
@@ -26,14 +26,14 @@ export class MyTicketsPage {
   }
 
   ionViewWillEnter() {
-    this.userId = this.authService.profile_id;
-    if(this.userId!=null){
-      this.ticketService.getTicketListByUserId(this.userId).subscribe((res) => {
-        console.log("got event list")
-        console.log(res)
-        this.userTickets = res;
-      })
-    }
+    this.authService.getProfileId().then((res) => {
+      this.userId = res;
+      this.ticketService.getTicketListByUserId(res).subscribe((res2) => {
+      console.log("got event list")
+      console.log(res2)
+      this.userTickets = res2;
+    })
+    });
     
   }
 

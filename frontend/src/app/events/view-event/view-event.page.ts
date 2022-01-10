@@ -27,7 +27,6 @@ export class ViewEventPage implements OnInit {
   private stoptions: any = null;
   private platform: string = null;
   private testApi = false;
-  private myAuthService: AuthService;
 
   apiUrl: string;
   ticketForm = null;
@@ -45,7 +44,6 @@ export class ViewEventPage implements OnInit {
     private zone: NgZone,
     private router: Router,
   ) {
-    this.myAuthService = authService;
     this.apiUrl = environment.api_url;
     this.id = this.actRoute.snapshot.paramMap.get('id');
   }
@@ -100,7 +98,7 @@ export class ViewEventPage implements OnInit {
     } else if (vType === 'mpd') {
     } else if (vType === 'smooth') {
     } else if (vType === 'aws') {
-    //} else if (vType === 'youtube') {
+    } else if (vType === 'youtube') {
     } else if (vType === 'application') {
     } else if (vType === 'internal') {
     } else if (vType === 'asset' && this.iPlatform) {
