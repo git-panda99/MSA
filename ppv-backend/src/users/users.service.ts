@@ -9,4 +9,9 @@ export class UsersService extends TypeOrmCrudService<User> {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>) {
         super(usersRepository)
     }
+
+    async update(id: number, data: Partial<User>) {
+        await this.usersRepository.update({ id }, data);
+        return await this.usersRepository.findOne({ id });
+    }
 }

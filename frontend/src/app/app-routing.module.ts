@@ -31,8 +31,11 @@ const routes: Routes = [
     path: 'embedded',
     loadChildren: () => import('./events/embedded/embedded.module').then( m => m.EmbeddedPageModule)
   },
-
-
+  {
+    path: 'confirm/:token',
+    loadChildren: () => import('./auth/confirm/confirm.module').then( m => m.ConfirmPageModule)
+  },
+  
 ];
 @NgModule({
   imports: [
