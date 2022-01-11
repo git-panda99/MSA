@@ -14,7 +14,8 @@
         <img *ngIf="ticket.event.posterUrl" [src]="apiUrl+'/files/'+ticket.event.posterUrl" />
       </ion-thumbnail>
       <ion-label>
-        <ion-card-title button [routerLink]="['../event/', ticket.event.id]">{{ticket.event.title}}</ion-card-title>
+        <ion-card-title button [routerLink]="['../event/', ticket.event.id]" *ngIf="ticket.ticket.purchaseDate==null">{{ticket.event.title}}</ion-card-title>
+        <ion-card-title button [routerLink]="['../watch/', ticket.event.id]" *ngIf="ticket.ticket.purchaseDate!=null">{{ticket.event.title}}</ion-card-title>
         <p>{{ticket.event.beginDate | date: 'MMM dd, YYYY'}} - {{ticket.event.endDate | date: 'MMM dd, YYYY'}}</p>
         <ion-text color="primary">
           <p><ion-text *ngIf="ticket.ticket.purchaseDate!=null" color="primary">BOUGHT </ion-text><ion-text *ngIf="ticket.ticket.liked==true" color="primary">LIKED</ion-text></p>
