@@ -6,7 +6,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"  class="ion-text-center">
+  <h1 class="nextshow">Your next show from the confort of your home!</h1>
   <ion-grid>
     <ion-row>
     <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
@@ -21,5 +22,18 @@
   </ion-col>
   </ion-row>
   </ion-grid> 
+
+  <ion-list-header>Organizers:</ion-list-header>
+  <ion-slides pager="true" [options]="{initialSlide: 1, speed: 400}" >
+    <ion-slide *ngFor="let user of Users">
+
+      <ion-avatar   style="zoom:2.0;"  >
+        <img *ngIf="user.imageUrl" [src]="apiUrl+'/files/'+user.imageUrl" />
+      </ion-avatar>
+        <ion-text>
+          <h2>{{user.firstName}} {{user.lastName}}</h2>
+        </ion-text>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>

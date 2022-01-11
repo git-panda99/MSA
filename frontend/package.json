@@ -32,6 +32,7 @@
     "capacitor-video-player": "^3.3.2",
     "cordova-plugin-stripe": "^1.5.3",
     "rxjs": "~6.6.0",
+    "swiper": "^7.4.1",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
