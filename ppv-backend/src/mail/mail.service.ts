@@ -41,6 +41,7 @@ export class MailService {
             firstName: user.firstName,
             purchaseData: Date(),
             event: event.title,
+            price: event.price,
             eventDate: event.beginDate,
             url: 'http://localhost:8100/tabs/event/'+event.id,
             image: 'https://bpstream.ro/img/undraw_printing_invoices_5r4r.png',

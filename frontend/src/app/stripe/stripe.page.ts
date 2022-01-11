@@ -100,8 +100,8 @@ export class StripePage {
     .subscribe(data => {
     console.log("Pay Response")
     console.log(data);
-    this.buyEvent()
     });
+    this.buyEvent()
     }
 
     buyEvent(){
