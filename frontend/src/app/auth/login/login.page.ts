@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
         await loading.dismiss();
         const alert = await this.alertController.create({
           header: 'Login failed',
-          message: res.error.msg,
+          message: res.error.message,
           buttons: ['OK'],
         });
         await alert.present();

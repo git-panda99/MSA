@@ -27,7 +27,7 @@ export class User {
     email: string;
 
     @ApiProperty()
-    @Column({ type: 'enum', enum: Role, default: Role.User })
+    @Column({ type: 'enum', enum: Role, default: Role.User, nullable: true })
     roles: Role;
 
     @ApiProperty()
@@ -61,7 +61,7 @@ export class User {
 
     @BeforeInsert()
     async setUserDetails() {
-        this.roles = Role.Organizer;
+        this.roles = null;
         this.status = Status.Pending;
 
         //create confimation code token
