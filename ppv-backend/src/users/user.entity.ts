@@ -35,7 +35,7 @@ export class User {
     status: Status;
 
     @ApiProperty()
-    @Column({unique: true})
+    @Column()
     confirmationCode: string;
 
     @ApiProperty()
