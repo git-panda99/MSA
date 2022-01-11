@@ -102,8 +102,8 @@ export class ViewEventPage implements OnInit {
     } else if (vType === 'mpd') {
     } else if (vType === 'smooth') {
     } else if (vType === 'aws') {
-    } else if (vType === 'youtube') {
-    } else if (vType === 'application') {
+    //} else if (vType === 'youtube') {
+    /*} else if (vType === 'application') {
     } else if (vType === 'internal') {
     } else if (vType === 'asset' && this.iPlatform) {
     } else if (vType === 'asset' && this.aPlatform) {
@@ -111,7 +111,7 @@ export class ViewEventPage implements OnInit {
     } else if (vType === 'dcim' && this.aPlatform) {
     } else if (vType === 'extSdCard' && this.aPlatform) {
     } else if (vType === 'intFileIOS' && this.iPlatform) {
-    } else if (vType === 'dcimIOS' && this.iPlatform) {
+    } else if (vType === 'dcimIOS' && this.iPlatform) {*/
     } else {
       console.log('Video format not supported');
     }

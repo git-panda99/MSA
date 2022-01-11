@@ -30,6 +30,20 @@ export class MyEventsPage {
       this.router.navigate(['/tabs/home']);
     } else {
       this.eventVideoService.getEventVideoListById(this.myAuthService.profile_id).subscribe((res) => {
+      this.EventVideos = res;
+    })
+    }
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.eventVideoService.getEventVideoListById(this.myAuthService.profile_id).subscribe((res) => {
+      this.EventVideos = res;
+    })
+    }
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.eventVideoService.getEventVideoListById(this.myAuthService.profile_id).subscribe((res) => {
       console.log("got event list")
       console.log(res)
       this.EventVideos = res;

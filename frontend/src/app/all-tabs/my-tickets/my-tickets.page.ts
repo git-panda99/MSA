@@ -34,6 +34,20 @@ export class MyTicketsPage {
       this.router.navigate(['/tabs/home']);
     } else {
       this.ticketService.getTicketListByUserId(this.myAuthService.profile_id).subscribe((res) => {
+        this.userTickets = res;
+      })
+    }
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.ticketService.getTicketListByUserId(this.myAuthService.profile_id).subscribe((res) => {
+        this.userTickets = res;
+      })
+    }
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.ticketService.getTicketListByUserId(this.myAuthService.profile_id).subscribe((res) => {
         console.log("got event list")
         console.log(res)
         this.userTickets = res;
