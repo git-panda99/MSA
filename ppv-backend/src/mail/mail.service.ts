@@ -18,6 +18,7 @@ export class MailService {
           context: { // ✏️ filling curly brackets with content
             firstName: user.firstName,
             url,
+            image: 'https://bpstream.ro/img/undraw_Envelope_re_f5j4.png',
           },
         })
         .then((success) => {
