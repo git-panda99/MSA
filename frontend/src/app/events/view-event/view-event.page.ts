@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from 'src/app/auth/auth/auth.service';
 import { TicketService } from 'src/app/shared/ticket.service';
 import { FormBuilder } from '@angular/forms';
+import { Stripe } from '@ionic-native/stripe/ngx';
 
 @Component({
   selector: 'app-view-event',
@@ -44,6 +45,7 @@ export class ViewEventPage implements OnInit {
     public fb: FormBuilder,
     private zone: NgZone,
     private router: Router,
+    private stripe: Stripe
   ) {
     this.myAuthService = authService;
     this.apiUrl = environment.api_url;
@@ -145,16 +147,7 @@ export class ViewEventPage implements OnInit {
         });
   }
 
-  buyEvent(){
-    console.log("Ticket" +this.ticketForm.value);
-    this.ticketService.addTicketBuy(this.ticketForm.value)
-        .subscribe((res) => {
-          this.zone.run(() => {
-            console.log(res)
-            this.router.navigate(['/tabs/my-tickets']);
-          })
-        });
-  }
+  
 
 
 }

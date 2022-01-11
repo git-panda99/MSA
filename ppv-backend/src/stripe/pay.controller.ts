@@ -1,19 +1,14 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { Role } from 'src/auth/role.enum';
-import { Roles } from 'src/auth/roles.decorator';
-import { RolesGuard } from 'src/auth/roles.guard';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/auth/public.decorator';
 import { PayService } from './pay.service';
 
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard, RolesGuard)
+@Public()
 @Controller('pay')
 @ApiTags('pay')
 export class PayController {
     constructor(private stripe:PayService) {}
 
-    @Roles(Role.User, Role.Organizer, Role.Admin)
     @ApiOperation({
       summary: 'Charge for stripe',
     })

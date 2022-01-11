@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'confirm/:token',
     loadChildren: () => import('./auth/confirm/confirm.module').then( m => m.ConfirmPageModule)
   },
+  {
+    path: 'stripe/:eventid/:eventprice/:eventtitle/:userid',
+    loadChildren: () => import('./stripe/stripe.module').then( m => m.StripePageModule)
+  },
+
 
 
 

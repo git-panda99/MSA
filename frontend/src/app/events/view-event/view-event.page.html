@@ -35,6 +35,6 @@
 
   <ion-button [routerLink]="['../../login']" fill="clear" expand="block" *ngIf="myAuthService.profile_roles==null">Log in to Buy Ticket</ion-button>
   <ion-button (click)="testVideoPlayerPlugin()" color='primary' expand="block" *ngIf="myAuthService.profile_id==eventVideo.userId">Play Video</ion-button>
-  <ion-button (click)="buyEvent()" color='primary' expand="block" *ngIf="myAuthService.profile_roles!=null">Buy Ticket</ion-button>
+  <ion-button [routerLink]="['/stripe/', eventVideo.id, eventVideo.price, eventVideo.title, myAuthService.profile_id]" color='primary' expand="block" *ngIf="myAuthService.profile_roles!=null">Buy Ticket</ion-button>
 
 </ion-content>
