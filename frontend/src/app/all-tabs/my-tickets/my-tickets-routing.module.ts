@@ -5,7 +5,6 @@ import { MyTicketsPage } from './my-tickets.page';
 
 const routes: Routes = [
   {path: '', component: MyTicketsPage,},
-  {path: 'event/:id', component: ViewEventPage},
 ];
 
 @NgModule({
