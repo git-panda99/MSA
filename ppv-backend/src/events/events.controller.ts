@@ -38,10 +38,15 @@ export class EventsController implements CrudController<Event>{
 
     @Override('getManyBase')
     @Public()
-    getEvents(
+    async getEvents(
         @ParsedRequest() req: CrudRequest,
     ) {
-        return this.base.getManyBase(req);
+        let e: any = await this.base.getManyBase(req);
+        if(e.id) {
+            if(e.beginDate < new Date() && e.endDate > new Date())
+                e.ended=true;
+        }
+        return 
     }
 
     @Override('getOneBase')

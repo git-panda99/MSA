@@ -108,7 +108,7 @@ export class StripePage {
       this.ticketService.addTicketBuy({id:0, userId: this.userId, eventId: this.eventId, valid: true, liked: true, purchaseDate: new Date()})
           .subscribe((res) => {
             console.log(res)
-              this.router.navigate(['/tabs/event/'+this.eventId]);
+              this.router.navigate(['/tabs/watch/'+this.eventId]);
           });
     }
 

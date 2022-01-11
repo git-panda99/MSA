@@ -39,7 +39,7 @@ export class User {
     confirmationCode: string;
 
     @ApiProperty()
-    @Column()
+    @Column({length:2000})
     description: string;
 
     @ApiProperty()

@@ -23,7 +23,7 @@ export class Event {
     posterUrl: string;
 
     @ApiProperty()
-    @Column()
+    @Column({length:2000})
     description: string;
 
     @ApiProperty()

@@ -42,7 +42,11 @@ const routes: Routes = [
       {
         path: 'event/:id',
         loadChildren: () => import('../events/view-event/view-event.module').then( m => m.ViewEventPageModule)
-      }
+      },
+      {
+        path: 'watch/:id',
+        loadChildren: () => import('../events/watch/watch.module').then( m => m.WatchPageModule)
+      },
     ]
   },
   {

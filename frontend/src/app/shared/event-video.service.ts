@@ -53,7 +53,7 @@ export class EventVideoService {
   }
 
   getEventVideoListById(id): Observable<any> {
-    return this.http.get<EventVideo[]>(environment.api_url + '/events/user/' + id, this.httpOptions)
+    return this.http.get<EventVideo[]>(environment.api_url + '/events/user/' + id)
       .pipe(
         tap(events => console.log('Events fetched!')),
         catchError(this.handleError<EventVideo[]>(`Get Events for user ${id}`, []))

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>view-event</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="eventVideo" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img *ngIf="eventVideo.posterUrl" [src]="apiUrl+'/files/'+eventVideo.posterUrl"/>
+      </ion-col>
+      <ion-col>
+        <div>
+          <h2>{{eventVideo?.title}}</h2>
+          
+          <button ion-button clear (click)="likeEvent()" style="background: none !important;" *ngIf="myAuthService.profile_roles!=null">
+            <ion-icon name="heart" style="zoom:2.0" color="primary"></ion-icon>
+          </button>
+          
+          <ion-text  color="primary">
+            <p *ngIf="eventVideo.type=='premiere'">PRIMARY</p>
+            <p *ngIf="eventVideo.type=='live'">LIVE</p>
+            <p *ngIf="eventVideo.type=='recording'">RECORDING</p>
+          </ion-text>
+          <ion-card-subtitle class="ion-text-end">{{eventVideo.price}} lei</ion-card-subtitle>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <p>{{eventVideo.beginDate | date: 'MMM dd, YYYY'}} - {{eventVideo.endDate | date: 'MMM dd, YYYY'}}</p>
+      <p>{{eventVideo.description}}</p>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="testVideoPlayerPlugin()" color='primary' expand="block">Play Video</ion-button>
+
+</ion-content>
