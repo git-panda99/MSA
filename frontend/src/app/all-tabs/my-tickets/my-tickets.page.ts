@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth/auth.service';
 import { TicketService } from 'src/app/shared/ticket.service';
 import { environment } from 'src/environments/environment';
@@ -12,11 +13,14 @@ export class MyTicketsPage {
   userId;
   userTickets: any = [];
   apiUrl;
+  private myAuthService;
 
   constructor(
     private ticketService: TicketService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
+    this.myAuthService = authService;
     this.apiUrl = environment.api_url;
   }
 
@@ -26,15 +30,15 @@ export class MyTicketsPage {
   }
 
   ionViewWillEnter() {
-    this.authService.getProfileId().then((res) => {
-      this.userId = res;
-      this.ticketService.getTicketListByUserId(res).subscribe((res2) => {
-      console.log("got event list")
-      console.log(res2)
-      this.userTickets = res2;
-    })
-    });
-    
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.ticketService.getTicketListByUserId(this.myAuthService.profile_id).subscribe((res) => {
+        console.log("got event list")
+        console.log(res)
+        this.userTickets = res;
+      })
+    }    
   }
 
 }

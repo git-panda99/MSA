@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth/auth.service';
 import { EventVideoService } from 'src/app/shared/event-video.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,21 +12,29 @@ import { environment } from 'src/environments/environment';
 export class MyEventsPage {
   EventVideos: any = [];
   apiUrl: string;
+  private myAuthService;
 
   constructor(
-    private eventVideoService: EventVideoService
+    private eventVideoService: EventVideoService,
+    private authService: AuthService,
+    private router: Router
   ) {
+    this.myAuthService = authService;
     this.apiUrl = environment.api_url;
   }
 
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.eventVideoService.getEventVideoListById().subscribe((res) => {
+    if(this.myAuthService.profile_id==null){
+      this.router.navigate(['/tabs/home']);
+    } else {
+      this.eventVideoService.getEventVideoListById(this.myAuthService.profile_id).subscribe((res) => {
       console.log("got event list")
       console.log(res)
       this.EventVideos = res;
     })
+    }
   }
 
   deleteEventVideo(eventVideo, i) {

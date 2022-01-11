@@ -17,7 +17,7 @@ export class TicketService {
       (res) => {
         this.httpOptions = { headers: new HttpHeaders({ 
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${res}`
+          'Authorization': `Bearer ${res}`
         })}
       }
     )

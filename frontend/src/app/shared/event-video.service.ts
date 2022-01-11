@@ -18,7 +18,7 @@ export class EventVideoService {
         (res) => {
           this.httpOptions = { headers: new HttpHeaders({ 
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${res}`
+            'Authorization': `Bearer ${res}`
           })}
         }
       )
@@ -52,11 +52,11 @@ export class EventVideoService {
       );
   }
 
-  getEventVideoListById(): Observable<any> {
-    return this.http.get<EventVideo[]>(environment.api_url + '/events/user/' + this.userId, this.httpOptions)
+  getEventVideoListById(id): Observable<any> {
+    return this.http.get<EventVideo[]>(environment.api_url + '/events/user/' + id, this.httpOptions)
       .pipe(
         tap(events => console.log('Events fetched!')),
-        catchError(this.handleError<EventVideo[]>(`Get Events for user ${this.userId}`, []))
+        catchError(this.handleError<EventVideo[]>(`Get Events for user ${id}`, []))
       );
   }
 
