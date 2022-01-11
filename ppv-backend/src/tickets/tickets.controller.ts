@@ -83,14 +83,14 @@ export class TicketsController implements CrudController<Ticket>{
                 return new HttpException("Ticket has already been purchased", HttpStatus.BAD_REQUEST);
             ticket.purchaseDate = new Date();
             ticket.valid = true;
-            this.eventService.buyTicket(event.id, 1);
+            this.eventService.buyTicket(user, event.id, 1);
             return this.service.update(ticket.id, ticket);
         }
 
         dto.purchaseDate = new Date();
         dto.valid = true;
         dto.liked = false;
-        this.eventService.buyTicket(event.id, 1);
+        this.eventService.buyTicket(user, event.id, 1);
 
         return this.service.create(dto);
     }
