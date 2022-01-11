@@ -11,19 +11,24 @@
       <ion-label>Search</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="my-tickets">
+    <ion-tab-button tab="my-tickets"  *ngIf="myAuthService.profile_roles!=null">
       <ion-icon name="heart-outline"></ion-icon>
       <ion-label>My Tickets</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="my-events">
+    <ion-tab-button tab="my-events" *ngIf="myAuthService.profile_roles=='admin'||myAuthService.profile_roles=='org'">
       <ion-icon name="ticket-outline"></ion-icon>
       <ion-label>My Events</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="settings">
+    <ion-tab-button tab="settings" *ngIf="myAuthService.profile_roles!=null">
       <ion-icon name="settings-outline"></ion-icon>
       <ion-label>Settings</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="login" *ngIf="myAuthService.profile_roles==null">
+      <ion-icon name="log-in-outline"></ion-icon>
+      <ion-label>Login</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 

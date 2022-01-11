@@ -15,8 +15,6 @@ const routes: Routes = [
       {
         path: 'search',
         loadChildren: () => import('../all-tabs/search/search.module').then(m => m.SearchPageModule),
-        canActivate: [AuthGuard],
-        runGuardsAndResolvers: 'always'
       },
       {
         path: 'my-tickets',
@@ -42,6 +40,10 @@ const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('../auth/login/login.module').then(m => m.LoginPageModule),
   },
   {
     path: '',
