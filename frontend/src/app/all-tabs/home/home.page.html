@@ -10,7 +10,7 @@
   <ion-grid>
     <ion-row>
     <ion-col   sizeLg="5" sizeMd="5" sizeXs="6" *ngFor="let event of EventVideos" >
-    <ion-card button [routerLink]="['./event/', event.id]">
+    <ion-card button [routerLink]="['../event/', event.id]">
       <img *ngIf="event.posterUrl" [src]="apiUrl+'/files/'+event.posterUrl"/>
       <ion-card-header>
         <ion-card-title>{{event.title}}</ion-card-title>
