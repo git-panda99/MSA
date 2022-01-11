@@ -27,6 +27,7 @@ export class ViewEventPage implements OnInit {
   private stoptions: any = null;
   private platform: string = null;
   private testApi = false;
+  private myAuthService: AuthService;
 
   apiUrl: string;
   ticketForm = null;
@@ -44,6 +45,7 @@ export class ViewEventPage implements OnInit {
     private zone: NgZone,
     private router: Router,
   ) {
+    this.myAuthService = authService;
     this.apiUrl = environment.api_url;
     this.id = this.actRoute.snapshot.paramMap.get('id');
   }
